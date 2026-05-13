@@ -6,38 +6,51 @@ import seaborn as sns
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+
 from sklearn.metrics import accuracy_score, confusion_matrix
 
-# ---------------- PAGE ----------------
+# ---------------------------------------------------
+# PAGE
+# ---------------------------------------------------
 
 st.set_page_config(
     page_title="AI Окуучу Прогнозу",
     layout="wide"
 )
 
-st.title("🚀 Машиналык окутуу: Окуучулардын жетишкендигин болжолдоо")
+st.title("Жасалма интеллект технологияларын колдонуу менен студенттердин жетишүүсүн болжолдуу аныктоо (прогноздоо)")
 st.markdown("---")
 
-# ---------------- KYRGYZ NAMES ----------------
+# ---------------------------------------------------
+# KYRGYZ COLUMN NAMES
+# ---------------------------------------------------
 
-kyrgyz_names = {
+kyrgyz_columns = {
     'age': 'Жашы',
     'sex': 'Жынысы',
+    'studytime': 'Окуу убактысы',
+    'absences': 'Сабак калтыруу',
+    'G3': 'Жыйынтык баа',
     'Medu': 'Апасынын билими',
     'Fedu': 'Атасынын билими',
     'Mjob': 'Апасынын жумушу',
     'Fjob': 'Атасынын жумушу',
-    'studytime': 'Окууга жумшаган убактысы',
-    'failures': 'Ийгиликсиздиктери',
-    'absences': 'Калтыруулары',
-    'goout': 'Достору менен чыгуу',
-    'freetime': 'Бош убактысы',
-    'health': 'Ден соолугу',
+    'failures': 'Ийгиликсиздик',
+    'goout': 'Сыртка чыгуу',
+    'freetime': 'Бош убакыт',
+    'health': 'Ден соолук',
     'traveltime': 'Жолго кеткен убакыт'
 }
 
-# ---------------- SIDEBAR ----------------
+# ---------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------
 
 st.sidebar.header("Параметрлер")
 
@@ -46,36 +59,39 @@ uploaded_file = st.sidebar.file_uploader(
     type="csv"
 )
 
-# ---------------- MAIN ----------------
+# ---------------------------------------------------
+# MAIN
+# ---------------------------------------------------
 
 if uploaded_file is not None:
 
     try:
-        # CSV окуу
         df = pd.read_csv(uploaded_file, sep=';')
 
-        # Бош файл текшерүү
         if df.empty:
             st.error("CSV файлы бош.")
             st.stop()
 
-        # G3 текшерүү
         if 'G3' not in df.columns:
-            st.error("CSV файлында 'G3' колонкасы жок.")
+            st.error("G3 колонкасы табылган жок.")
             st.stop()
 
+        # ---------------------------------------------------
+        # TABS
+        # ---------------------------------------------------
+
         tab1, tab2 = st.tabs([
-            "📊 Маалыматтарды анализдөө",
-            "🤖 ЖИ Модели"
+            "Маалыматтарды анализдөө",
+            "ЖИ Моделдери"
         ])
 
-        # ==================================================
+        # ===================================================
         # TAB 1
-        # ==================================================
+        # ===================================================
 
         with tab1:
 
-            st.subheader("Маалыматтардын фрагменти")
+            st.subheader("Маалыматтардын таблицасы")
 
             preview_cols = [
                 col for col in
@@ -83,9 +99,18 @@ if uploaded_file is not None:
                 if col in df.columns
             ]
 
-            st.dataframe(df[preview_cols].head(10))
+            preview_df = df[preview_cols].copy()
 
-            st.subheader("Факторлордун өз ара байланышы (Heatmap)")
+            preview_df.rename(
+                columns=kyrgyz_columns,
+                inplace=True
+            )
+
+            st.dataframe(preview_df.head(10))
+
+            # ---------------- HEATMAP ----------------
+
+            st.subheader("Факторлордун байланышы")
 
             numeric_df = df.select_dtypes(include=[np.number])
 
@@ -101,21 +126,17 @@ if uploaded_file is not None:
 
                 st.pyplot(fig_corr)
 
-            else:
-                st.warning("Heatmap үчүн сандык маалымат жетишсиз.")
-
-        # ==================================================
+        # ===================================================
         # TAB 2
-        # ==================================================
+        # ===================================================
 
         with tab2:
 
-            st.subheader("Random Forest модели")
+            st.subheader("Жасалма интеллект моделдерин салыштыруу")
 
-            # Көчүрмө алуу
+            # ---------------- CLEAN DATA ----------------
+
             data_clean = df.copy()
-
-            # ---------- TEXT -> NUMBER ----------
 
             for col in data_clean.columns:
 
@@ -127,18 +148,15 @@ if uploaded_file is not None:
                         data_clean[col].astype(str)
                     )
 
-            # ---------- NaN CLEAN ----------
-
-            data_clean = data_clean.replace([np.inf, -np.inf], np.nan)
             data_clean = data_clean.fillna(0)
 
-            # ---------- TARGET ----------
+            # ---------------- TARGET ----------------
 
             data_clean['target'] = data_clean['G3'].apply(
                 lambda x: 1 if x >= 10 else 0
             )
 
-            # ---------- FEATURES ----------
+            # ---------------- FEATURES ----------------
 
             drop_cols = [
                 col for col in ['G1', 'G2', 'G3', 'target']
@@ -146,15 +164,12 @@ if uploaded_file is not None:
             ]
 
             X = data_clean.drop(drop_cols, axis=1)
-
             y = data_clean['target']
-
-            # ---------- TO NUMERIC ----------
 
             X = X.apply(pd.to_numeric, errors='coerce')
             X = X.fillna(0)
 
-            # ---------- TRAIN TEST ----------
+            # ---------------- SPLIT ----------------
 
             X_train, X_test, y_train, y_test = train_test_split(
                 X,
@@ -163,42 +178,96 @@ if uploaded_file is not None:
                 random_state=42
             )
 
-            # ---------- MODEL ----------
+            # ===================================================
+            # MODELS
+            # ===================================================
 
-            model = RandomForestClassifier(
-                n_estimators=100,
-                random_state=42
-            )
+            models = {
+                "Логистикалык регрессия": LogisticRegression(max_iter=1000),
+                "Кокустук токой (Random Forest)": RandomForestClassifier(random_state=42),
+                "Чечим дарагы (Decision Tree)": DecisionTreeClassifier(random_state=42),
+                "KNN": KNeighborsClassifier(),
+                "Naive Bayes": GaussianNB()
+            }
 
-            model.fit(X_train, y_train)
+            results = {}
 
-            # ---------- PREDICT ----------
+            best_model = None
+            best_accuracy = 0
+            best_predictions = None
 
-            y_pred = model.predict(X_test)
+            # ---------------- TRAIN MODELS ----------------
 
-            # ==================================================
-            # RESULTS
-            # ==================================================
+            for name, model in models.items():
 
-            col_acc, col_cm = st.columns([1, 1])
+                model.fit(X_train, y_train)
 
-            # ---------- ACCURACY ----------
-
-            with col_acc:
+                y_pred = model.predict(X_test)
 
                 accuracy = accuracy_score(y_test, y_pred)
 
-                st.metric(
-                    "Random Forest тактыгы",
-                    f"{accuracy:.2%}"
-                )
+                results[name] = accuracy
 
-                st.write("#### Ийгиликтин негизги факторлору")
+                if accuracy > best_accuracy:
+                    best_accuracy = accuracy
+                    best_model = model
+                    best_predictions = y_pred
+                    best_model_name = name
 
-                importances = model.feature_importances_
+            # ===================================================
+            # RESULTS TABLE
+            # ===================================================
+
+            st.write("### Моделдердин тактыгы")
+
+            results_df = pd.DataFrame({
+                "Модель": results.keys(),
+                "Тактык": [
+                    f"{acc:.2%}"
+                    for acc in results.values()
+                ]
+            })
+
+            st.dataframe(results_df)
+
+            # ===================================================
+            # BAR CHART
+            # ===================================================
+
+            st.write("### Моделдерди салыштыруу")
+
+            fig_bar, ax_bar = plt.subplots(figsize=(8, 5))
+
+            pd.Series(results).sort_values().plot(
+                kind='barh',
+                ax=ax_bar
+            )
+
+            ax_bar.set_xlabel("Тактык")
+
+            st.pyplot(fig_bar)
+
+            # ===================================================
+            # BEST MODEL
+            # ===================================================
+
+            st.success(
+                f"Эң жакшы модель: {best_model_name} "
+                f"({best_accuracy:.2%})"
+            )
+
+            # ===================================================
+            # FEATURE IMPORTANCE
+            # ===================================================
+
+            if hasattr(best_model, 'feature_importances_'):
+
+                st.write("### Эң маанилүү факторлор")
+
+                importances = best_model.feature_importances_
 
                 display_features = [
-                    kyrgyz_names.get(c, c)
+                    kyrgyz_columns.get(c, c)
                     for c in X.columns
                 ]
 
@@ -216,33 +285,33 @@ if uploaded_file is not None:
 
                 st.pyplot(fig_f)
 
-            # ---------- CONFUSION MATRIX ----------
+            # ===================================================
+            # CONFUSION MATRIX
+            # ===================================================
 
-            with col_cm:
+            st.write("### Ката/Дал келбөө матрицасы (Confusion Matrix")
 
-                st.write("#### Болжолдоонун тактыгы")
+            cm = confusion_matrix(y_test, best_predictions)
 
-                cm = confusion_matrix(y_test, y_pred)
+            fig_cm, ax_cm = plt.subplots(figsize=(5, 4))
 
-                fig_cm, ax_cm = plt.subplots(figsize=(5, 4))
+            sns.heatmap(
+                cm,
+                annot=True,
+                fmt='d',
+                cmap='Greens',
+                ax=ax_cm
+            )
 
-                sns.heatmap(
-                    cm,
-                    annot=True,
-                    fmt='d',
-                    cmap='Greens',
-                    ax=ax_cm
-                )
+            ax_cm.set_xlabel("Божомол")
+            ax_cm.set_ylabel("Чыныгы жооп")
 
-                ax_cm.set_xlabel("Болжолдоо")
-                ax_cm.set_ylabel("Чындык")
-
-                st.pyplot(fig_cm)
+            st.pyplot(fig_cm)
 
     except Exception as e:
 
-        st.error("Ката пайда болду:")
+        st.error("Ката пайда болду")
         st.exception(e)
 
 else:
-    st.info("Сураныч, сол тараптан CSV файлын жүктөңүз.")
+    st.info("CSV файлын жүктөңүз.")
