@@ -32,9 +32,161 @@ st.markdown("""
 <style>
 
 /* =======================================================
-FIX: FILE UPLOADER (светлый блок → тёмный glassmorphism)
+BACKGROUND
+======================================================= */
+.stApp {
+    background:
+        radial-gradient(circle at top left, #7c3aed 0%, transparent 25%),
+        radial-gradient(circle at bottom right, #a855f7 0%, transparent 25%),
+        linear-gradient(135deg, #0f0f1a, #151528, #1e1b4b);
+    color: white;
+}
+
+/* =======================================================
+GLOBAL TEXT
+======================================================= */
+html, body, [class*="css"] {
+    color: #f5f3ff !important;
+}
+
+/* =======================================================
+SIDEBAR
+======================================================= */
+section[data-testid="stSidebar"] {
+    background: rgba(17, 24, 39, 0.78);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Sidebar text */
+section[data-testid="stSidebar"] * {
+    color: #ffffff !important;
+}
+
+/* =======================================================
+HEADINGS
+======================================================= */
+h1 {
+    color: white !important;
+    font-size: 52px !important;
+    font-weight: 800 !important;
+}
+
+h2, h3 {
+    color: #ffffff !important;
+}
+
+/* =======================================================
+HERO CARD
+======================================================= */
+.hero {
+    background: rgba(15,15,26,0.58);
+    border-radius: 30px;
+    padding: 40px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.10);
+    margin-bottom: 25px;
+}
+
+/* =======================================================
+METRICS
+======================================================= */
+div[data-testid="metric-container"] {
+    background: rgba(15, 15, 26, 0.72) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    padding: 22px !important;
+    border-radius: 24px !important;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 8px 30px rgba(124,58,237,0.28);
+}
+
+/* Верхние labels */
+div[data-testid="metric-container"] label,
+div[data-testid="metric-container"] p {
+    color: rgba(255,255,255,0.82) !important;
+    font-weight: 500 !important;
+}
+
+/* Основные цифры */
+div[data-testid="metric-container"] [data-testid="stMetricValue"] {
+    color: white !important;
+    font-size: 42px !important;
+    font-weight: 800 !important;
+}
+
+/* Все элементы внутри */
+div[data-testid="metric-container"] * {
+    color: white !important;
+}
+
+/* Отступы между колонками */
+div[data-testid="column"] {
+    padding: 8px;
+}
+
+/* =======================================================
+TABS
+======================================================= */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 14px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 12px 24px;
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.3s;
+}
+
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #a855f7
+    ) !important;
+    color: white !important;
+}
+
+/* =======================================================
+DATAFRAME
+======================================================= */
+[data-testid="stDataFrame"] {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* =======================================================
+BUTTONS
+======================================================= */
+.stButton>button {
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #c084fc
+    );
+    color: white !important;
+    border: none;
+    border-radius: 18px;
+    padding: 12px 26px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 6px 20px rgba(124,58,237,0.35);
+}
+
+.stButton>button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(168,85,247,0.45);
+}
+
+/* =======================================================
+UPLOAD
 ======================================================= */
 
+/* Общий контейнер */
 [data-testid="stFileUploader"] {
     background: rgba(255,255,255,0.10) !important;
     border-radius: 22px;
@@ -43,249 +195,21 @@ FIX: FILE UPLOADER (светлый блок → тёмный glassmorphism)
     backdrop-filter: blur(14px);
 }
 
-/* Внутренний белый контейнер с файлом */
+/* Внутренний блок с названием файла */
 [data-testid="stFileUploader"] section {
-    background: rgba(15, 15, 26, 0.75) !important;
+    background: rgba(15, 15, 26, 0.78) !important;
     border-radius: 16px !important;
     border: 1px solid rgba(255,255,255,0.08) !important;
 }
 
-/* Название файла */
-[data-testid="stFileUploader"] section div,
-[data-testid="stFileUploader"] small,
-[data-testid="stFileUploader"] span,
-[data-testid="stFileUploader"] p {
+/* Текст */
+[data-testid="stFileUploader"] * {
     color: white !important;
 }
 
-/* Иконка файла */
+/* Иконки */
 [data-testid="stFileUploader"] svg {
     fill: white !important;
-    color: white !important;
-}
-
-
-/* =======================================================
-GLOBAL TEXT
-======================================================= */
-
-html, body, [class*="css"]  {
-
-    color: #f5f3ff !important;
-}
-
-/* =======================================================
-SIDEBAR
-======================================================= */
-
-section[data-testid="stSidebar"] {
-
-    background: rgba(17, 24, 39, 0.75);
-
-    backdrop-filter: blur(20px);
-
-    border-right: 1px solid rgba(255,255,255,0.08);
-}
-
-/* Sidebar text */
-
-section[data-testid="stSidebar"] * {
-
-    color: #ffffff !important;
-}
-
-/* =======================================================
-HEADINGS
-======================================================= */
-
-h1 {
-
-    color: white !important;
-
-    font-size: 52px !important;
-
-    font-weight: 800 !important;
-}
-
-h2, h3 {
-
-    color: #ffffff !important;
-}
-
-/* =======================================================
-HERO CARD
-======================================================= */
-
-.hero {
-
-    background: rgba(255,255,255,0.06);
-
-    border-radius: 30px;
-
-    padding: 40px;
-
-    backdrop-filter: blur(20px);
-
-    border: 1px solid rgba(255,255,255,0.08);
-
-    margin-bottom: 25px;
-}
-
-/* =======================================================
-METRICS
-======================================================= */
-
-div[data-testid="metric-container"] {
-    background: rgba(15, 15, 26, 0.72) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    padding: 22px !important;
-    border-radius: 24px !important;
-    backdrop-filter: blur(18px);
-    box-shadow:
-        0 8px 30px rgba(124,58,237,0.28);
-}
-
-/* Верхний label (Окуучулар, Орточо баа...) */
-div[data-testid="metric-container"] label,
-div[data-testid="metric-container"] p {
-    color: rgba(255,255,255,0.82) !important;
-    font-weight: 500 !important;
-}
-
-/* Основное число */
-div[data-testid="metric-container"] [data-testid="stMetricValue"] {
-    color: white !important;
-    font-size: 42px !important;
-    font-weight: 800 !important;
-}
-
-/* Delta / дополнительные элементы */
-div[data-testid="metric-container"] * {
-    color: white !important;
-}
-
-/* =======================================================
-EXTRA: Сделать колонки визуально отделёнными
-======================================================= */
-
-div[data-testid="column"] {
-    padding: 8px;
-}
-
-/* =======================================================
-OPTIONAL: Hero card чуть темнее для контраста
-======================================================= */
-
-.hero {
-    background: rgba(15,15,26,0.58) !important;
-    border: 1px solid rgba(255,255,255,0.10) !important;
-}
-
-/* =======================================================
-TABS
-======================================================= */
-
-.stTabs [data-baseweb="tab-list"] {
-
-    gap: 14px;
-}
-
-.stTabs [data-baseweb="tab"] {
-
-    background: rgba(255,255,255,0.06);
-
-    border-radius: 16px;
-
-    padding: 12px 24px;
-
-    color: white !important;
-
-    border: 1px solid rgba(255,255,255,0.08);
-
-    transition: 0.3s;
-}
-
-.stTabs [aria-selected="true"] {
-
-    background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #a855f7
-    ) !important;
-
-    color: white !important;
-}
-
-/* =======================================================
-DATAFRAME
-======================================================= */
-
-[data-testid="stDataFrame"] {
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-/* =======================================================
-BUTTONS
-======================================================= */
-
-.stButton>button {
-
-    background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #c084fc
-    );
-
-    color: white !important;
-
-    border: none;
-
-    border-radius: 18px;
-
-    padding: 12px 26px;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    transition: 0.3s;
-
-    box-shadow:
-        0 6px 20px rgba(124,58,237,0.35);
-}
-
-.stButton>button:hover {
-
-    transform: scale(1.03);
-
-    box-shadow:
-        0 10px 30px rgba(168,85,247,0.45);
-}
-
-/* =======================================================
-UPLOAD
-======================================================= */
-
-[data-testid="stFileUploader"] {
-
-    background: rgba(255,255,255,0.06);
-
-    border-radius: 22px;
-
-    padding: 18px;
-
-    border: 1px dashed rgba(192,132,252,0.5);
-}
-
-/* upload text */
-
-[data-testid="stFileUploader"] * {
-
     color: white !important;
 }
 
@@ -294,104 +218,57 @@ SLIDERS
 ======================================================= */
 
 /* labels */
-
 .stSlider label {
-
     color: white !important;
-
     font-size: 16px !important;
 }
 
 /* numbers */
-
 .stSlider div {
-
     color: white !important;
 }
 
 /* =======================================================
 INPUTS
 ======================================================= */
-
 input {
-
     color: white !important;
 }
 
 /* =======================================================
 SUCCESS / ALERTS
 ======================================================= */
-
 .stSuccess,
 .stInfo,
 .stWarning,
 .stError {
-
     border-radius: 18px !important;
-
     color: white !important;
 }
 
 /* =======================================================
 SCROLLBAR
 ======================================================= */
-
 ::-webkit-scrollbar {
-
     width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-
     background: linear-gradient(
         #7c3aed,
         #c084fc
     );
-
     border-radius: 20px;
 }
 
 /* =======================================================
 FOOTER
 ======================================================= */
-
 footer {
-
     visibility: hidden;
 }
 
 </style>
-""", unsafe_allow_html=True)
-
-# =========================================================
-# HERO SECTION
-# =========================================================
-
-st.markdown("""
-<div style="
-background: rgba(255,255,255,0.06);
-padding:40px;
-border-radius:30px;
-backdrop-filter: blur(20px);
-border:1px solid rgba(255,255,255,0.08);
-margin-bottom:25px;
-">
-
-<h2 style="
-font-size:36px;
-margin-bottom:10px;
-">
-🧠 AI Student Performance Dashboard
-</h2>
-
-<p style="
-font-size:18px;
-color:#d8b4fe;
-">
-Жасалма интеллект аркылуу окуучулардын жетишкендигин анализдөө жана болжолдоо
-</p>
-
-</div>
 """, unsafe_allow_html=True)
 
 # =========================================================
