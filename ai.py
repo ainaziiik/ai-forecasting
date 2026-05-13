@@ -89,8 +89,7 @@ div[data-testid="metric-container"] {
     backdrop-filter: blur(18px);
 }
 
-</style>
-""", unsafe_allow_html=True)
+
 
 /* =========================================================
 НЕГИЗГИ ФОН
