@@ -25,11 +25,72 @@ st.set_page_config(
 )
 
 # =========================================================
-# CSS СТИЛЬ
+# CSS СТИЛЬ (ЖАҢЫЛАНГАН)
 # =========================================================
 
 st.markdown("""
 <style>
+
+/* Основной фон приложения */
+.stApp {
+    background:
+        radial-gradient(circle at top left, #7c3aed 0%, transparent 25%),
+        radial-gradient(circle at bottom right, #a855f7 0%, transparent 25%),
+        linear-gradient(135deg, #0f0f1a, #151528, #1e1b4b);
+    color: white;
+}
+
+/* Цвет текста в метриках (Окуучулар, Орточо баа, Колонкалар) */
+[data-testid="stMetricLabel"] p {
+    color: white !important;
+    font-size: 16px !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: white !important;
+    font-size: 42px !important;
+    font-weight: 800 !important;
+}
+
+/* Стиль обычных кнопок и кнопок загрузки */
+.stButton > button, [data-testid="stDownloadButton"] button {
+    background: linear-gradient(135deg, #7c3aed, #c084fc) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 18px !important;
+    padding: 12px 26px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    
+    /* Плавный переход для всех свойств */
+    transition: all 0.3s ease-in-out !important;
+    box-shadow: 0 6px 20px rgba(124,58,237,0.35) !important;
+}
+
+/* Эффект при наведении (Hover) */
+.stButton > button:hover, [data-testid="stDownloadButton"] button:hover {
+    transform: translateY(-3px) scale(1.05) !important; /* Приподнимается и увеличивается */
+    background: linear-gradient(135deg, #a855f7, #d8b4fe) !important; /* Цвет становится ярче */
+    box-shadow: 0 10px 30px rgba(168,85,247,0.5) !important; /* Тень усиливается */
+    cursor: pointer !important;
+}
+
+/* Эффект при нажатии (Active) */
+.stButton > button:active, [data-testid="stDownloadButton"] button:active {
+    transform: translateY(1px) scale(0.98) !important;
+}
+
+/* Остальные стили для KPI карточек */
+div[data-testid="metric-container"] {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 22px;
+    border-radius: 24px;
+    backdrop-filter: blur(18px);
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 /* =========================================================
 НЕГИЗГИ ФОН
