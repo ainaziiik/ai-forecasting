@@ -237,35 +237,48 @@ div[data-testid="stMetricValue"] {
 TAB
 ========================================================= */
 
-.stTabs [data-baseweb="tab-list"] {
+/* =========================================================
+TAB (ЖАҢЫЛАНГАН ХУВЕР МЕНЕН)
+========================================================= */
 
+.stTabs [data-baseweb="tab-list"] {
     gap: 14px;
 }
 
 .stTabs [data-baseweb="tab"] {
-
-    background: rgba(255,255,255,0.06);
-
+    background: rgba(255, 255, 255, 0.06);
     border-radius: 16px;
-
     padding: 12px 24px;
-
     color: white !important;
-
-    border: 1px solid rgba(255,255,255,0.08);
-
-    transition: 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    
+    /* Плавный переход для всех изменений */
+    transition: all 0.3s ease-in-out !important;
 }
 
-.stTabs [aria-selected="true"] {
+/* Эффект при наведении на вкладку */
+.stTabs [data-baseweb="tab"]:hover {
+    background: rgba(255, 255, 255, 0.15) !important; /* Становится светлее */
+    transform: translateY(-2px) !important; /* Слегка приподнимается */
+    border-color: rgba(168, 85, 247, 0.5) !important; /* Появляется фиолетовое свечение у бордера */
+    cursor: pointer !important;
+}
 
+/* Активная (выбранная) вкладка */
+.stTabs [aria-selected="true"] {
     background: linear-gradient(
         135deg,
         #7c3aed,
         #a855f7
     ) !important;
-
     color: white !important;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4) !important;
+    transform: translateY(0px) !important; /* Выбранная вкладка не «прыгает» */
+}
+
+/* Убираем красную/стандартную линию под табами, если она мешает дизайну */
+.stTabs [data-baseweb="tab-highlight"] {
+    background-color: #a855f7 !important; /* Делаем линию под цвет бренда */
 }
 
 /* =========================================================
