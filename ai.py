@@ -482,7 +482,7 @@ if uploaded_file is not None:
         # =====================================================
         # 1-ТАБ
         # =====================================================
-    with tab1:
+        with tab1:
 
             st.subheader("📋 Маалыматтар таблицасы")
 
@@ -497,39 +497,39 @@ if uploaded_file is not None:
 
             st.dataframe(preview_df.head(10))
 
-        # =====================================================
-        # HEATMAP
-        # =====================================================
+            # =====================================================
+            # HEATMAP
+            # =====================================================
 
-        st.subheader("🔥 Факторлордун байланышы")
+            st.subheader("🔥 Факторлордун байланышы")
 
-        numeric_df = df.select_dtypes(include=[np.number])
+            numeric_df = df.select_dtypes(include=[np.number])
 
-        fig_corr, ax_corr = plt.subplots(figsize=(12, 6))
+            fig_corr, ax_corr = plt.subplots(figsize=(12, 6))
 
-        sns.heatmap(
-        numeric_df.corr(),
-        cmap='magma',
-        ax=ax_corr
-        )
+            sns.heatmap(
+                numeric_df.corr(),
+                cmap='magma',
+                ax=ax_corr
+            )
 
-        st.pyplot(fig_corr)
-        
-        # =====================================================
-        # ГРАФИК
-        # =====================================================
-        
-        st.subheader("📈 Баалардын бөлүштүрүлүшү")
-        
-        fig_hist, ax_hist = plt.subplots(figsize=(8, 4))
-        
-        sns.histplot(
-            df['G3'],
-            kde=True,
-            ax=ax_hist
-        )
+            st.pyplot(fig_corr)
 
-        st.pyplot(fig_hist)
+            # =====================================================
+            # ГРАФИК
+            # =====================================================
+
+            st.subheader("📈 Баалардын бөлүштүрүлүшү")
+
+            fig_hist, ax_hist = plt.subplots(figsize=(8, 4))
+
+            sns.histplot(
+                df['G3'],
+                kde=True,
+                ax=ax_hist
+            )
+
+            st.pyplot(fig_hist)
 
         # =====================================================
         # МААЛЫМАТТЫ ДАЯРДОО
@@ -618,7 +618,7 @@ if uploaded_file is not None:
         # 2-ТАБ
         # =====================================================
 
-with tab2:
+                with tab2:
 
             st.subheader("🏆 Моделдерди салыштыруу")
 
@@ -632,96 +632,95 @@ with tab2:
 
             st.dataframe(results_df)
 
-# =====================================================
-# ГРАФИК МОДЕЛДЕР
-# =====================================================
+            # =====================================================
+            # ГРАФИК МОДЕЛДЕР
+            # =====================================================
 
-fig_bar, ax_bar = plt.subplots(figsize=(8, 5))
+            fig_bar, ax_bar = plt.subplots(figsize=(8, 5))
 
-pd.Series(results).sort_values().plot(
-    kind='barh',
-    ax=ax_bar
-)
+            pd.Series(results).sort_values().plot(
+                kind='barh',
+                ax=ax_bar
+            )
 
-ax_bar.set_xlabel("Тактык")
+            ax_bar.set_xlabel("Тактык")
 
-st.pyplot(fig_bar)
+            st.pyplot(fig_bar)
 
-# =====================================================
-# ЭҢ МЫКТЫ МОДЕЛЬ
-# =====================================================
+            # =====================================================
+            # ЭҢ МЫКТЫ МОДЕЛЬ
+            # =====================================================
 
-st.success(
-    f"✨ Эң жакшы модель: "
-    f"{best_model_name} "
-    f"({best_accuracy:.2%})"
-)
+            st.success(
+                f"✨ Эң жакшы модель: "
+                f"{best_model_name} "
+                f"({best_accuracy:.2%})"
+            )
 
-# =====================================================
-# FEATURE IMPORTANCE
-# =====================================================
+            # =====================================================
+            # FEATURE IMPORTANCE
+            # =====================================================
 
-if hasattr(best_model, 'feature_importances_'):
+            if hasattr(best_model, 'feature_importances_'):
 
-    st.subheader("📌 Маанилүү факторлор")
+                st.subheader("📌 Маанилүү факторлор")
 
-    importances = best_model.feature_importances_
+                importances = best_model.feature_importances_
 
-    display_features = [
-        kyrgyz_columns.get(c, c)
-        for c in X.columns
-    ]
+                display_features = [
+                    kyrgyz_columns.get(c, c)
+                    for c in X.columns
+                ]
 
-    feat_imp = pd.Series(
-        importances,
-        index=display_features
-    )
+                feat_imp = pd.Series(
+                    importances,
+                    index=display_features
+                )
 
-    fig_f, ax_f = plt.subplots(figsize=(8, 5))
+                fig_f, ax_f = plt.subplots(figsize=(8, 5))
 
-    feat_imp.nlargest(10).sort_values().plot(
-        kind='barh',
-        ax=ax_f
-    )
+                feat_imp.nlargest(10).sort_values().plot(
+                    kind='barh',
+                    ax=ax_f
+                )
 
-    st.pyplot(fig_f)
+                st.pyplot(fig_f)
 
-# =====================================================
-# CONFUSION MATRIX
-# =====================================================
+            # =====================================================
+            # CONFUSION MATRIX
+            # =====================================================
 
-st.subheader("🎯 Confusion Matrix")
+            st.subheader("🎯 Confusion Matrix")
 
-cm = confusion_matrix(
-    y_test,
-    best_predictions
-)
+            cm = confusion_matrix(
+                y_test,
+                best_predictions
+            )
 
-fig_cm, ax_cm = plt.subplots(figsize=(5, 4))
+            fig_cm, ax_cm = plt.subplots(figsize=(5, 4))
 
-sns.heatmap(
-    cm,
-    annot=True,
-    fmt='d',
-    cmap='Purples',
-    ax=ax_cm
-)
+            sns.heatmap(
+                cm,
+                annot=True,
+                fmt='d',
+                cmap='Purples',
+                ax=ax_cm
+            )
 
-ax_cm.set_xlabel("Божомол")
-ax_cm.set_ylabel("Чыныгы жооп")
+            ax_cm.set_xlabel("Божомол")
+            ax_cm.set_ylabel("Чыныгы жооп")
 
-st.pyplot(fig_cm)
+            st.pyplot(fig_cm)
 
-# =====================================================
-# DOWNLOAD BUTTON
-# =====================================================
+            # =====================================================
+            # DOWNLOAD BUTTON
+            # =====================================================
 
-st.download_button(
-    "📥 Натыйжаларды жүктөө",
-    results_df.to_csv(index=False),
-    file_name="ai_results.csv"
-)
-
+            st.download_button(
+                "📥 Натыйжаларды жүктөө",
+                results_df.to_csv(index=False),
+                file_name="ai_results.csv"
+            )
         # =====================================================
         # 3-ТАБ
         # =====================================================
