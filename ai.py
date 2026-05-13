@@ -499,6 +499,40 @@ if uploaded_file is not None:
             st.dataframe(preview_df.head(10))
 
         # =====================================================
+# HEATMAP
+# =====================================================
+
+st.subheader("🔥 Факторлордун байланышы")
+
+numeric_df = df.select_dtypes(include=[np.number])
+
+fig_corr, ax_corr = plt.subplots(figsize=(12, 6))
+
+sns.heatmap(
+    numeric_df.corr(),
+    cmap='magma',
+    ax=ax_corr
+)
+
+st.pyplot(fig_corr)
+
+# =====================================================
+# ГРАФИК
+# =====================================================
+
+st.subheader("📈 Баалардын бөлүштүрүлүшү")
+
+fig_hist, ax_hist = plt.subplots(figsize=(8, 4))
+
+sns.histplot(
+    df['G3'],
+    kde=True,
+    ax=ax_hist
+)
+
+st.pyplot(fig_hist)
+
+        # =====================================================
         # МААЛЫМАТТЫ ДАЯРДОО
         # =====================================================
 
