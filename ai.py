@@ -252,7 +252,10 @@ TAB
 }
 
 /* Hover */
+.stButton > button {
 
+    transition: all 0.25s ease;
+}
 .stButton > button:hover {
 
     transform: scale(1.03);
