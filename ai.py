@@ -15,164 +15,276 @@ from sklearn.naive_bayes import GaussianNB
 
 from sklearn.metrics import accuracy_score, confusion_matrix
 
-# ---------------------------------------------------
-# PAGE
-# ---------------------------------------------------
+# =========================================================
+# PAGE CONFIG
+# =========================================================
 
 st.set_page_config(
-    page_title="AI Окуучу Прогнозу",
+    page_title="AI Student Dashboard",
     layout="wide"
 )
 
-# ---------------------------------------------------
-# CUSTOM CSS
-# ---------------------------------------------------
+# =========================================================
+# MODERN UI
+# =========================================================
 
 st.markdown("""
 <style>
 
-/* Основной фон */
+/* ---------------- MAIN BACKGROUND ---------------- */
+
 .stApp {
-    background: linear-gradient(
-        135deg,
-        #0f172a,
-        #111827,
-        #1e293b
-    );
+    background:
+        radial-gradient(circle at top left, #7c3aed 0%, transparent 25%),
+        radial-gradient(circle at bottom right, #a855f7 0%, transparent 25%),
+        linear-gradient(135deg, #0f0f1a, #151528, #1e1b4b);
+
     color: white;
 }
 
-/* Sidebar */
+/* ---------------- SIDEBAR ---------------- */
+
 section[data-testid="stSidebar"] {
-    background: linear-gradient(
-        180deg,
-        #111827,
-        #1e293b
-    );
-    border-right: 1px solid #334155;
+
+    background: rgba(255,255,255,0.05);
+
+    backdrop-filter: blur(18px);
+
+    border-right: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Заголовок */
+/* ---------------- TITLE ---------------- */
+
 h1 {
-    color: #38bdf8;
+
+    font-size: 52px !important;
+
+    font-weight: 800 !important;
+
     text-align: center;
-    font-size: 42px !important;
-    font-weight: 800;
+
+    color: white;
+
     margin-bottom: 10px;
 }
 
-/* Подзаголовки */
+/* ---------------- HEADINGS ---------------- */
+
 h2, h3 {
-    color: #f8fafc;
+
+    color: #f5f3ff;
 }
 
-/* Карточки */
+/* ---------------- GLASS CARDS ---------------- */
+
 div[data-testid="metric-container"] {
+
     background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 20px;
-    border-radius: 18px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    padding: 22px;
+
+    border-radius: 24px;
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 8px 32px rgba(124,58,237,0.25);
+
+    transition: 0.3s ease;
 }
 
-/* Tabs */
+div[data-testid="metric-container"]:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 40px rgba(168,85,247,0.35);
+}
+
+/* ---------------- TABS ---------------- */
+
 .stTabs [data-baseweb="tab-list"] {
-    gap: 20px;
+
+    gap: 15px;
 }
 
 .stTabs [data-baseweb="tab"] {
-    background-color: #1e293b;
-    border-radius: 12px;
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 16px;
+
+    padding: 12px 24px;
+
     color: white;
-    padding: 10px 20px;
-}
 
-.stTabs [aria-selected="true"] {
-    background-color: #0ea5e9 !important;
-    color: white !important;
-}
+    border: 1px solid rgba(255,255,255,0.08);
 
-/* Таблицы */
-[data-testid="stDataFrame"] {
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid #334155;
-}
-
-/* Кнопки */
-.stButton>button {
-    background: linear-gradient(
-        90deg,
-        #0ea5e9,
-        #2563eb
-    );
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 10px 20px;
-    font-weight: bold;
     transition: 0.3s;
 }
 
+.stTabs [data-baseweb="tab"]:hover {
+
+    background: rgba(168,85,247,0.2);
+}
+
+.stTabs [aria-selected="true"] {
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #a855f7
+    ) !important;
+
+    color: white !important;
+}
+
+/* ---------------- DATAFRAME ---------------- */
+
+[data-testid="stDataFrame"] {
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(14px);
+}
+
+/* ---------------- BUTTONS ---------------- */
+
+.stButton>button {
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #c084fc
+    );
+
+    color: white;
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 12px 26px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 6px 20px rgba(124,58,237,0.35);
+}
+
 .stButton>button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 20px rgba(14,165,233,0.5);
+
+    transform: scale(1.04);
+
+    box-shadow:
+        0 10px 30px rgba(168,85,247,0.45);
 }
 
-/* Upload */
+/* ---------------- FILE UPLOADER ---------------- */
+
 [data-testid="stFileUploader"] {
-    background-color: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    padding: 15px;
-    border: 1px dashed #38bdf8;
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 22px;
+
+    padding: 20px;
+
+    border: 1px dashed rgba(192,132,252,0.5);
+
+    backdrop-filter: blur(10px);
 }
 
-/* Графики */
-.element-container img {
-    border-radius: 15px;
+/* ---------------- ALERTS ---------------- */
+
+.stSuccess,
+.stInfo,
+.stWarning,
+.stError {
+
+    border-radius: 18px !important;
 }
 
-/* Footer */
+/* ---------------- IMAGES ---------------- */
+
+img {
+
+    border-radius: 18px;
+}
+
+/* ---------------- FOOTER ---------------- */
+
 footer {
+
     visibility: hidden;
 }
 
-/* Скролл */
+/* ---------------- SCROLLBAR ---------------- */
+
 ::-webkit-scrollbar {
+
     width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #38bdf8;
-    border-radius: 10px;
+
+    background: linear-gradient(
+        #7c3aed,
+        #c084fc
+    );
+
+    border-radius: 20px;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-st.title("Жасалма интеллект технологияларын колдонуу менен студенттердин жетишүүсүн болжолдуу аныктоо (прогноздоо)")
+# =========================================================
+# HERO SECTION
+# =========================================================
+
 st.markdown("""
 <div style="
-    background: rgba(255,255,255,0.08);
-    padding: 25px;
-    border-radius: 20px;
-    text-align:center;
-    border:1px solid rgba(255,255,255,0.1);
-    margin-bottom:20px;
+background: rgba(255,255,255,0.06);
+padding:40px;
+border-radius:30px;
+backdrop-filter: blur(20px);
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:25px;
 ">
-    <h2 style="color:#38bdf8;">
-        🤖 Жасалма интеллект аркылуу окуучулардын жетишкендигин анализдөө
-    </h2>
-    <p style="font-size:18px; color:#cbd5e1;">
-        Machine Learning • Data Science • Streamlit Dashboard
-    </p>
+
+<h2 style="
+font-size:36px;
+margin-bottom:10px;
+">
+🧠 AI Student Performance Dashboard
+</h2>
+
+<p style="
+font-size:18px;
+color:#d8b4fe;
+">
+Жасалма интеллект аркылуу окуучулардын жетишкендигин анализдөө жана болжолдоо
+</p>
+
 </div>
 """, unsafe_allow_html=True)
 
-# ---------------------------------------------------
-# KYRGYZ COLUMN NAMES
-# ---------------------------------------------------
+# =========================================================
+# KYRGYZ NAMES
+# =========================================================
 
 kyrgyz_columns = {
     'age': 'Жашы',
@@ -191,50 +303,69 @@ kyrgyz_columns = {
     'traveltime': 'Жолго кеткен убакыт'
 }
 
-# ---------------------------------------------------
+# =========================================================
 # SIDEBAR
-# ---------------------------------------------------
+# =========================================================
 
-st.sidebar.header("Параметрлер")
+st.sidebar.title("⚙️ Башкаруу панели")
 
 uploaded_file = st.sidebar.file_uploader(
-    "student-mat.csv файлын жүктөңүз",
+    "CSV файлын жүктөңүз",
     type="csv"
 )
 
-# ---------------------------------------------------
+# =========================================================
 # MAIN
-# ---------------------------------------------------
+# =========================================================
 
 if uploaded_file is not None:
 
     try:
+
         df = pd.read_csv(uploaded_file, sep=';')
 
         if df.empty:
             st.error("CSV файлы бош.")
             st.stop()
 
-        if 'G3' not in df.columns:
-            st.error("G3 колонкасы табылган жок.")
-            st.stop()
+        # =====================================================
+        # KPI
+        # =====================================================
 
-        # ---------------------------------------------------
+        col1, col2, col3 = st.columns(3)
+
+        col1.metric(
+            "👨‍🎓 Окуучулар",
+            len(df)
+        )
+
+        col2.metric(
+            "📊 Орточо баа",
+            round(df['G3'].mean(), 2)
+        )
+
+        col3.metric(
+            "📚 Колонкалар",
+            len(df.columns)
+        )
+
+        # =====================================================
         # TABS
-        # ---------------------------------------------------
+        # =====================================================
 
-        tab1, tab2 = st.tabs([
-            "Маалыматтарды анализдөө",
-            "ЖИ Моделдери"
+        tab1, tab2, tab3 = st.tabs([
+            "📊 Анализ",
+            "🤖 AI Моделдер",
+            "🔮 Прогноз"
         ])
 
-        # ===================================================
+        # =====================================================
         # TAB 1
-        # ===================================================
+        # =====================================================
 
         with tab1:
 
-            st.subheader("Маалыматтардын таблицасы")
+            st.subheader("📋 Маалыматтар таблицасы")
 
             preview_cols = [
                 col for col in
@@ -251,95 +382,97 @@ if uploaded_file is not None:
 
             st.dataframe(preview_df.head(10))
 
-            # ---------------- HEATMAP ----------------
+            # -------------------------------------------------
 
-            st.subheader("Факторлордун байланышы")
+            st.subheader("🔥 Факторлордун байланышы")
 
             numeric_df = df.select_dtypes(include=[np.number])
 
-            if numeric_df.shape[1] > 1:
+            fig_corr, ax_corr = plt.subplots(figsize=(12, 6))
 
-                fig_corr, ax_corr = plt.subplots(figsize=(12, 6))
+            sns.heatmap(
+                numeric_df.corr(),
+                cmap='magma',
+                ax=ax_corr
+            )
 
-                sns.heatmap(
-                    numeric_df.corr(),
-                    cmap='coolwarm',
-                    ax=ax_corr
+            st.pyplot(fig_corr)
+
+            # -------------------------------------------------
+
+            st.subheader("📈 Баалардын бөлүштүрүлүшү")
+
+            fig_hist, ax_hist = plt.subplots(figsize=(8, 4))
+
+            sns.histplot(
+                df['G3'],
+                kde=True,
+                ax=ax_hist
+            )
+
+            st.pyplot(fig_hist)
+
+        # =====================================================
+        # DATA PREP
+        # =====================================================
+
+        data_clean = df.copy()
+
+        for col in data_clean.columns:
+
+            if data_clean[col].dtype == 'object':
+
+                le = LabelEncoder()
+
+                data_clean[col] = le.fit_transform(
+                    data_clean[col].astype(str)
                 )
 
-                st.pyplot(fig_corr)
+        data_clean = data_clean.fillna(0)
 
-        # ===================================================
-        # TAB 2
-        # ===================================================
+        data_clean['target'] = data_clean['G3'].apply(
+            lambda x: 1 if x >= 10 else 0
+        )
 
-        with tab2:
+        drop_cols = [
+            col for col in ['G1', 'G2', 'G3', 'target']
+            if col in data_clean.columns
+        ]
 
-            st.subheader("Жасалма интеллект моделдерин салыштыруу")
+        X = data_clean.drop(drop_cols, axis=1)
 
-            # ---------------- CLEAN DATA ----------------
+        y = data_clean['target']
 
-            data_clean = df.copy()
+        X = X.apply(pd.to_numeric, errors='coerce')
+        X = X.fillna(0)
 
-            for col in data_clean.columns:
+        X_train, X_test, y_train, y_test = train_test_split(
+            X,
+            y,
+            test_size=0.2,
+            random_state=42
+        )
 
-                if data_clean[col].dtype == 'object':
+        # =====================================================
+        # MODELS
+        # =====================================================
 
-                    le = LabelEncoder()
+        models = {
+            "Random Forest": RandomForestClassifier(random_state=42),
+            "Logistic Regression": LogisticRegression(max_iter=1000),
+            "Decision Tree": DecisionTreeClassifier(random_state=42),
+            "KNN": KNeighborsClassifier(),
+            "Naive Bayes": GaussianNB()
+        }
 
-                    data_clean[col] = le.fit_transform(
-                        data_clean[col].astype(str)
-                    )
+        results = {}
 
-            data_clean = data_clean.fillna(0)
+        best_model = None
+        best_accuracy = 0
+        best_predictions = None
+        best_model_name = ""
 
-            # ---------------- TARGET ----------------
-
-            data_clean['target'] = data_clean['G3'].apply(
-                lambda x: 1 if x >= 10 else 0
-            )
-
-            # ---------------- FEATURES ----------------
-
-            drop_cols = [
-                col for col in ['G1', 'G2', 'G3', 'target']
-                if col in data_clean.columns
-            ]
-
-            X = data_clean.drop(drop_cols, axis=1)
-            y = data_clean['target']
-
-            X = X.apply(pd.to_numeric, errors='coerce')
-            X = X.fillna(0)
-
-            # ---------------- SPLIT ----------------
-
-            X_train, X_test, y_train, y_test = train_test_split(
-                X,
-                y,
-                test_size=0.2,
-                random_state=42
-            )
-
-            # ===================================================
-            # MODELS
-            # ===================================================
-
-            models = {
-                "Логистикалык регрессия": LogisticRegression(max_iter=1000),
-                "Кокустук токой (Random Forest)": RandomForestClassifier(random_state=42),
-                "Чечим дарагы (Decision Tree)": DecisionTreeClassifier(random_state=42),
-                "KNN": KNeighborsClassifier(),
-                "Naive Bayes": GaussianNB()
-            }
-
-            results = {}
-
-            best_model = None
-            best_accuracy = 0
-            best_predictions = None
-
-            # ---------------- TRAIN MODELS ----------------
+        with st.spinner("🤖 AI модель окутулууда..."):
 
             for name, model in models.items():
 
@@ -352,16 +485,19 @@ if uploaded_file is not None:
                 results[name] = accuracy
 
                 if accuracy > best_accuracy:
+
                     best_accuracy = accuracy
                     best_model = model
                     best_predictions = y_pred
                     best_model_name = name
 
-            # ===================================================
-            # RESULTS TABLE
-            # ===================================================
+        # =====================================================
+        # TAB 2
+        # =====================================================
 
-            st.write("### Моделдердин тактыгы")
+        with tab2:
+
+            st.subheader("🏆 Моделдерди салыштыруу")
 
             results_df = pd.DataFrame({
                 "Модель": results.keys(),
@@ -373,11 +509,7 @@ if uploaded_file is not None:
 
             st.dataframe(results_df)
 
-            # ===================================================
-            # BAR CHART
-            # ===================================================
-
-            st.write("### Моделдерди салыштыруу")
+            # -------------------------------------------------
 
             fig_bar, ax_bar = plt.subplots(figsize=(8, 5))
 
@@ -390,22 +522,19 @@ if uploaded_file is not None:
 
             st.pyplot(fig_bar)
 
-            # ===================================================
-            # BEST MODEL
-            # ===================================================
+            # -------------------------------------------------
 
             st.success(
-                f"Эң жакшы модель: {best_model_name} "
+                f"✨ Эң жакшы модель: "
+                f"{best_model_name} "
                 f"({best_accuracy:.2%})"
             )
 
-            # ===================================================
-            # FEATURE IMPORTANCE
-            # ===================================================
+            # -------------------------------------------------
 
             if hasattr(best_model, 'feature_importances_'):
 
-                st.write("### Эң маанилүү факторлор")
+                st.subheader("📌 Маанилүү факторлор")
 
                 importances = best_model.feature_importances_
 
@@ -428,13 +557,14 @@ if uploaded_file is not None:
 
                 st.pyplot(fig_f)
 
-            # ===================================================
-            # CONFUSION MATRIX
-            # ===================================================
+            # -------------------------------------------------
 
-            st.write("### Ката/Дал келбөө матрицасы (Confusion Matrix")
+            st.subheader("🎯 Confusion Matrix")
 
-            cm = confusion_matrix(y_test, best_predictions)
+            cm = confusion_matrix(
+                y_test,
+                best_predictions
+            )
 
             fig_cm, ax_cm = plt.subplots(figsize=(5, 4))
 
@@ -442,7 +572,7 @@ if uploaded_file is not None:
                 cm,
                 annot=True,
                 fmt='d',
-                cmap='Greens',
+                cmap='Purples',
                 ax=ax_cm
             )
 
@@ -451,10 +581,82 @@ if uploaded_file is not None:
 
             st.pyplot(fig_cm)
 
+            # -------------------------------------------------
+
+            st.download_button(
+                "📥 Натыйжаларды жүктөө",
+                results_df.to_csv(index=False),
+                file_name="ai_results.csv"
+            )
+
+        # =====================================================
+        # TAB 3
+        # =====================================================
+
+        with tab3:
+
+            st.subheader("🔮 Окуучунун жыйынтыгын болжолдоо")
+
+            age = st.slider("Жашы", 15, 22, 17)
+
+            studytime = st.slider(
+                "Окуу убактысы",
+                1,
+                4,
+                2
+            )
+
+            absences = st.slider(
+                "Сабак калтыруу",
+                0,
+                30,
+                5
+            )
+
+            failures = st.slider(
+                "Ийгиликсиздик",
+                0,
+                4,
+                0
+            )
+
+            if st.button("🤖 Прогноз жасоо"):
+
+                input_data = np.zeros(len(X.columns))
+
+                feature_map = {
+                    'age': age,
+                    'studytime': studytime,
+                    'absences': absences,
+                    'failures': failures
+                }
+
+                for i, col in enumerate(X.columns):
+
+                    if col in feature_map:
+                        input_data[i] = feature_map[col]
+
+                prediction = best_model.predict(
+                    [input_data]
+                )[0]
+
+                if prediction == 1:
+
+                    st.success(
+                        "🎉 Окуучу ийгиликтүү өтүшү мүмкүн!"
+                    )
+
+                else:
+
+                    st.error(
+                        "⚠️ Кошумча даярдык керек болушу мүмкүн."
+                    )
+
     except Exception as e:
 
         st.error("Ката пайда болду")
         st.exception(e)
 
 else:
-    st.info("CSV файлын жүктөңүз.")
+
+    st.info("📂 CSV файлын жүктөңүз.")
