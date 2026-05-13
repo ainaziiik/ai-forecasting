@@ -15,12 +15,7 @@ from sklearn.naive_bayes import GaussianNB
 
 from sklearn.metrics import accuracy_score, confusion_matrix
 
-st.markdown("""
 <style>
-st.set_page_config(
-    page_title="AI Student Dashboard",
-    layout="wide"
-)
 
 /* =======================================================
 BACKGROUND
@@ -132,11 +127,7 @@ TABS
 }
 
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #a855f7
-    ) !important;
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
     color: white !important;
 }
 
@@ -152,12 +143,8 @@ DATAFRAME
 /* =======================================================
 BUTTONS
 ======================================================= */
-.stButton>button {
-    background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #c084fc
-    );
+.stButton > button {
+    background: linear-gradient(135deg, #7c3aed, #c084fc);
     color: white !important;
     border: none;
     border-radius: 18px;
@@ -168,7 +155,7 @@ BUTTONS
     box-shadow: 0 6px 20px rgba(124,58,237,0.35);
 }
 
-.stButton>button:hover {
+.stButton > button:hover {
     transform: scale(1.03);
     box-shadow: 0 10px 30px rgba(168,85,247,0.45);
 }
@@ -177,7 +164,7 @@ BUTTONS
 UPLOAD
 ======================================================= */
 
-/* Общий контейнер */
+/* Внешний контейнер */
 [data-testid="stFileUploader"] {
     background: rgba(255,255,255,0.10) !important;
     border-radius: 22px;
@@ -186,16 +173,36 @@ UPLOAD
     backdrop-filter: blur(14px);
 }
 
-/* Внутренний блок с названием файла */
-[data-testid="stFileUploader"] section {
-    background: rgba(15, 15, 26, 0.78) !important;
-    border-radius: 16px !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
+/* Drag & drop зона */
+[data-testid="stFileUploaderDropzone"] {
+    background: rgba(15,15,26,0.58) !important;
+    border-radius: 18px !important;
+    border: 1px dashed rgba(192,132,252,0.45) !important;
 }
 
-/* Текст */
-[data-testid="stFileUploader"] * {
+/* Белый блок с загруженным файлом */
+[data-testid="stFileUploader"] section {
+    background: rgba(15,15,26,0.82) !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    padding: 8px !important;
+}
+
+/* Название файла + размер */
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploader"] span,
+[data-testid="stFileUploader"] p,
+[data-testid="stFileUploader"] label,
+[data-testid="stFileUploader"] div {
     color: white !important;
+}
+
+/* Кнопка Browse files */
+[data-testid="stFileUploader"] button {
+    background: linear-gradient(135deg, #7c3aed, #c084fc) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 14px !important;
 }
 
 /* Иконки */
@@ -207,14 +214,11 @@ UPLOAD
 /* =======================================================
 SLIDERS
 ======================================================= */
-
-/* labels */
 .stSlider label {
     color: white !important;
     font-size: 16px !important;
 }
 
-/* numbers */
 .stSlider div {
     color: white !important;
 }
@@ -222,8 +226,18 @@ SLIDERS
 /* =======================================================
 INPUTS
 ======================================================= */
-input {
+input, textarea {
     color: white !important;
+    background: rgba(255,255,255,0.06) !important;
+}
+
+/* =======================================================
+SELECTBOX / MULTISELECT
+======================================================= */
+div[data-baseweb="select"] > div {
+    background: rgba(255,255,255,0.06) !important;
+    color: white !important;
+    border-radius: 14px !important;
 }
 
 /* =======================================================
@@ -245,10 +259,7 @@ SCROLLBAR
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(
-        #7c3aed,
-        #c084fc
-    );
+    background: linear-gradient(#7c3aed, #c084fc);
     border-radius: 20px;
 }
 
@@ -259,9 +270,45 @@ footer {
     visibility: hidden;
 }
 
-</style>
-""", unsafe_allow_html=True)
+/* =======================================================
+STREAMLIT HEADER
+======================================================= */
+header {
+    background: transparent !important;
+}
 
+/* =======================================================
+MAIN BLOCK PADDING
+======================================================= */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* =======================================================
+CARDS / CONTAINERS
+======================================================= */
+div[data-testid="stVerticalBlock"] > div:has(.element-container) {
+    border-radius: 20px;
+}
+
+/* =======================================================
+TABLES
+======================================================= */
+table {
+    color: white !important;
+}
+
+/* =======================================================
+EXPANDER
+======================================================= */
+.streamlit-expanderHeader {
+    color: white !important;
+    background: rgba(255,255,255,0.05) !important;
+    border-radius: 14px !important;
+}
+
+</style>
 # =========================================================
 # KYRGYZ NAMES
 # =========================================================
