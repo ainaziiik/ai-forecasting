@@ -39,20 +39,25 @@ if uploaded_file is not None:
         st.pyplot(fig_corr)
 
     with tab2:
-        data = df.copy()
+        # Маалыматтарды тазалоо жана даярдоо
+        data_clean = df.copy()
+        
+        # Бардык 'object' (текст) типтеги колонкаларды таап, санга айлантуу
         le = LabelEncoder()
-        for col in data.columns:
-            if data[col].dtype == 'object':
-                data[col] = le.fit_transform(data[col].astype(str))
-
-        data = data.fillna(0)
-        data['target'] = data['G3'].apply(lambda x: 1 if x >= 10 else 0)
-
-        X = data.drop(['G3', 'target', 'G1', 'G2'], axis=1)
-        y = data['target']
-
+        for col in data_clean.columns:
+            if data_clean[col].dtype == 'object' or data_clean[col].dtype.name == 'category':
+                data_clean[col] = le.fit_transform(data_clean[col].astype(str))
+        
+        # Натыйжаны (G3) классификацияга айлантуу
+        data_clean['target'] = data_clean['G3'].apply(lambda x: 1 if x >= 10 else 0)
+        
+        # Керексиз колонкаларды алып салуу
+        X = data_clean.drop(['G3', 'target', 'G1', 'G2'], axis=1, errors='ignore')
+        y = data_clean['target']
+        
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+        # Моделди окутуу
         model = RandomForestClassifier(n_estimators=100, random_state=42)
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
@@ -62,4 +67,21 @@ if uploaded_file is not None:
         with col_acc:
             st.metric("Random Forest тактыгы", f"{accuracy_score(y_test, y_pred):.2%}")
             st.write("#### Ийгиликтин негизги факторлору")
-            importances = model.feature
+            importances = model.feature_importances_
+            # Түшүнүктүү аттарды берүү
+            display_features = [kyrgyz_names.get(c, c) for c in X.columns]
+            feat_imp = pd.Series(importances, index=display_features)
+            fig_f, ax_f = plt.subplots()
+            feat_imp.nlargest(10).sort_values().plot(kind='barh', color='skyblue', ax=ax_f)
+            st.pyplot(fig_f)
+
+        with col_cm:
+            st.write("#### Болжолдоонун тактыгы (Confusion Matrix)")
+            cm = confusion_matrix(y_test, y_pred)
+            fig_cm, ax_cm = plt.subplots()
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Greens', ax=ax_cm)
+            plt.xlabel('Болжолдоо')
+            plt.ylabel('Чындык')
+            st.pyplot(fig_cm)
+else:
+    st.info("Сураныч, сол тараптан CSV файлын жүктөңүз.")
