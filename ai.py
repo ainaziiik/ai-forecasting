@@ -31,9 +31,12 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* ---------------- MAIN BACKGROUND ---------------- */
+/* =======================================================
+BACKGROUND
+======================================================= */
 
 .stApp {
+
     background:
         radial-gradient(circle at top left, #7c3aed 0%, transparent 25%),
         radial-gradient(circle at bottom right, #a855f7 0%, transparent 25%),
@@ -42,72 +45,106 @@ st.markdown("""
     color: white;
 }
 
-/* ---------------- SIDEBAR ---------------- */
+/* =======================================================
+GLOBAL TEXT
+======================================================= */
+
+html, body, [class*="css"]  {
+
+    color: #f5f3ff !important;
+}
+
+/* =======================================================
+SIDEBAR
+======================================================= */
 
 section[data-testid="stSidebar"] {
 
-    background: rgba(255,255,255,0.05);
+    background: rgba(17, 24, 39, 0.75);
 
-    backdrop-filter: blur(18px);
+    backdrop-filter: blur(20px);
 
     border-right: 1px solid rgba(255,255,255,0.08);
 }
 
-/* ---------------- TITLE ---------------- */
+/* Sidebar text */
+
+section[data-testid="stSidebar"] * {
+
+    color: #ffffff !important;
+}
+
+/* =======================================================
+HEADINGS
+======================================================= */
 
 h1 {
+
+    color: white !important;
 
     font-size: 52px !important;
 
     font-weight: 800 !important;
-
-    text-align: center;
-
-    color: white;
-
-    margin-bottom: 10px;
 }
-
-/* ---------------- HEADINGS ---------------- */
 
 h2, h3 {
 
-    color: #f5f3ff;
+    color: #ffffff !important;
 }
 
-/* ---------------- GLASS CARDS ---------------- */
+/* =======================================================
+HERO CARD
+======================================================= */
+
+.hero {
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 30px;
+
+    padding: 40px;
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    margin-bottom: 25px;
+}
+
+/* =======================================================
+METRICS
+======================================================= */
 
 div[data-testid="metric-container"] {
 
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.07);
 
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.08);
 
-    padding: 22px;
+    padding: 20px;
 
     border-radius: 24px;
 
     backdrop-filter: blur(18px);
 
     box-shadow:
-        0 8px 32px rgba(124,58,237,0.25);
-
-    transition: 0.3s ease;
+        0 8px 30px rgba(124,58,237,0.25);
 }
 
-div[data-testid="metric-container"]:hover {
+/* Metric text */
 
-    transform: translateY(-4px);
+div[data-testid="metric-container"] * {
 
-    box-shadow:
-        0 12px 40px rgba(168,85,247,0.35);
+    color: white !important;
 }
 
-/* ---------------- TABS ---------------- */
+/* =======================================================
+TABS
+======================================================= */
 
 .stTabs [data-baseweb="tab-list"] {
 
-    gap: 15px;
+    gap: 14px;
 }
 
 .stTabs [data-baseweb="tab"] {
@@ -118,16 +155,11 @@ div[data-testid="metric-container"]:hover {
 
     padding: 12px 24px;
 
-    color: white;
+    color: white !important;
 
     border: 1px solid rgba(255,255,255,0.08);
 
     transition: 0.3s;
-}
-
-.stTabs [data-baseweb="tab"]:hover {
-
-    background: rgba(168,85,247,0.2);
 }
 
 .stTabs [aria-selected="true"] {
@@ -141,22 +173,22 @@ div[data-testid="metric-container"]:hover {
     color: white !important;
 }
 
-/* ---------------- DATAFRAME ---------------- */
+/* =======================================================
+DATAFRAME
+======================================================= */
 
 [data-testid="stDataFrame"] {
 
-    background: rgba(255,255,255,0.06);
-
-    border-radius: 22px;
+    border-radius: 20px;
 
     overflow: hidden;
 
     border: 1px solid rgba(255,255,255,0.08);
-
-    backdrop-filter: blur(14px);
 }
 
-/* ---------------- BUTTONS ---------------- */
+/* =======================================================
+BUTTONS
+======================================================= */
 
 .stButton>button {
 
@@ -166,7 +198,7 @@ div[data-testid="metric-container"]:hover {
         #c084fc
     );
 
-    color: white;
+    color: white !important;
 
     border: none;
 
@@ -186,13 +218,15 @@ div[data-testid="metric-container"]:hover {
 
 .stButton>button:hover {
 
-    transform: scale(1.04);
+    transform: scale(1.03);
 
     box-shadow:
         0 10px 30px rgba(168,85,247,0.45);
 }
 
-/* ---------------- FILE UPLOADER ---------------- */
+/* =======================================================
+UPLOAD
+======================================================= */
 
 [data-testid="stFileUploader"] {
 
@@ -200,14 +234,50 @@ div[data-testid="metric-container"]:hover {
 
     border-radius: 22px;
 
-    padding: 20px;
+    padding: 18px;
 
     border: 1px dashed rgba(192,132,252,0.5);
-
-    backdrop-filter: blur(10px);
 }
 
-/* ---------------- ALERTS ---------------- */
+/* upload text */
+
+[data-testid="stFileUploader"] * {
+
+    color: white !important;
+}
+
+/* =======================================================
+SLIDERS
+======================================================= */
+
+/* labels */
+
+.stSlider label {
+
+    color: white !important;
+
+    font-size: 16px !important;
+}
+
+/* numbers */
+
+.stSlider div {
+
+    color: white !important;
+}
+
+/* =======================================================
+INPUTS
+======================================================= */
+
+input {
+
+    color: white !important;
+}
+
+/* =======================================================
+SUCCESS / ALERTS
+======================================================= */
 
 .stSuccess,
 .stInfo,
@@ -215,23 +285,13 @@ div[data-testid="metric-container"]:hover {
 .stError {
 
     border-radius: 18px !important;
+
+    color: white !important;
 }
 
-/* ---------------- IMAGES ---------------- */
-
-img {
-
-    border-radius: 18px;
-}
-
-/* ---------------- FOOTER ---------------- */
-
-footer {
-
-    visibility: hidden;
-}
-
-/* ---------------- SCROLLBAR ---------------- */
+/* =======================================================
+SCROLLBAR
+======================================================= */
 
 ::-webkit-scrollbar {
 
@@ -246,6 +306,15 @@ footer {
     );
 
     border-radius: 20px;
+}
+
+/* =======================================================
+FOOTER
+======================================================= */
+
+footer {
+
+    visibility: hidden;
 }
 
 </style>
