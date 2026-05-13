@@ -31,12 +31,9 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* =======================================================
-BACKGROUND
-======================================================= */
+/* ---------------- MAIN BACKGROUND ---------------- */
 
 .stApp {
-
     background:
         radial-gradient(circle at top left, #7c3aed 0%, transparent 25%),
         radial-gradient(circle at bottom right, #a855f7 0%, transparent 25%),
@@ -45,110 +42,72 @@ BACKGROUND
     color: white;
 }
 
-/* =======================================================
-GLOBAL TEXT
-======================================================= */
-
-html, body, [class*="css"]  {
-
-    color: #f5f3ff !important;
-}
-
-/* =======================================================
-SIDEBAR
-======================================================= */
+/* ---------------- SIDEBAR ---------------- */
 
 section[data-testid="stSidebar"] {
 
-    background: rgba(17, 24, 39, 0.75);
+    background: rgba(255,255,255,0.05);
 
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(18px);
 
     border-right: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Sidebar text */
-
-section[data-testid="stSidebar"] * {
-
-    color: #ffffff !important;
-}
-
-/* =======================================================
-HEADINGS
-======================================================= */
+/* ---------------- TITLE ---------------- */
 
 h1 {
-
-    color: white !important;
 
     font-size: 52px !important;
 
     font-weight: 800 !important;
+
+    text-align: center;
+
+    color: white;
+
+    margin-bottom: 10px;
 }
+
+/* ---------------- HEADINGS ---------------- */
 
 h2, h3 {
 
-    color: #ffffff !important;
+    color: #f5f3ff;
 }
 
-/* =======================================================
-HERO CARD
-======================================================= */
-
-<div class="hero">
-
-<h2 style="
-font-size:36px;
-margin-bottom:10px;
-color:white;
-">
-🧠 AI Student Performance Dashboard
-</h2>
-
-<p style="
-font-size:18px;
-color:#d8b4fe;
-">
-Жасалма интеллект аркылуу окуучулардын жетишкендигин анализдөө жана болжолдоо
-</p>
-
-</div>
-
-/* =======================================================
-METRICS
-======================================================= */
+/* ---------------- GLASS CARDS ---------------- */
 
 div[data-testid="metric-container"] {
 
-    background: rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.08);
 
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
 
-    padding: 20px;
+    padding: 22px;
 
     border-radius: 24px;
 
     backdrop-filter: blur(18px);
 
     box-shadow:
-        0 8px 30px rgba(124,58,237,0.25);
+        0 8px 32px rgba(124,58,237,0.25);
+
+    transition: 0.3s ease;
 }
 
-/* Metric text */
+div[data-testid="metric-container"]:hover {
 
-div[data-testid="metric-container"] * {
+    transform: translateY(-4px);
 
-    color: white !important;
+    box-shadow:
+        0 12px 40px rgba(168,85,247,0.35);
 }
 
-/* =======================================================
-TABS
-======================================================= */
+/* ---------------- TABS ---------------- */
 
 .stTabs [data-baseweb="tab-list"] {
 
-    gap: 14px;
+    gap: 15px;
 }
 
 .stTabs [data-baseweb="tab"] {
@@ -159,11 +118,16 @@ TABS
 
     padding: 12px 24px;
 
-    color: white !important;
+    color: white;
 
     border: 1px solid rgba(255,255,255,0.08);
 
     transition: 0.3s;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+
+    background: rgba(168,85,247,0.2);
 }
 
 .stTabs [aria-selected="true"] {
@@ -177,22 +141,22 @@ TABS
     color: white !important;
 }
 
-/* =======================================================
-DATAFRAME
-======================================================= */
+/* ---------------- DATAFRAME ---------------- */
 
 [data-testid="stDataFrame"] {
 
-    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 22px;
 
     overflow: hidden;
 
     border: 1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(14px);
 }
 
-/* =======================================================
-BUTTONS
-======================================================= */
+/* ---------------- BUTTONS ---------------- */
 
 .stButton>button {
 
@@ -202,7 +166,7 @@ BUTTONS
         #c084fc
     );
 
-    color: white !important;
+    color: white;
 
     border: none;
 
@@ -222,15 +186,13 @@ BUTTONS
 
 .stButton>button:hover {
 
-    transform: scale(1.03);
+    transform: scale(1.04);
 
     box-shadow:
         0 10px 30px rgba(168,85,247,0.45);
 }
 
-/* =======================================================
-UPLOAD
-======================================================= */
+/* ---------------- FILE UPLOADER ---------------- */
 
 [data-testid="stFileUploader"] {
 
@@ -238,50 +200,14 @@ UPLOAD
 
     border-radius: 22px;
 
-    padding: 18px;
+    padding: 20px;
 
     border: 1px dashed rgba(192,132,252,0.5);
+
+    backdrop-filter: blur(10px);
 }
 
-/* upload text */
-
-[data-testid="stFileUploader"] * {
-
-    color: white !important;
-}
-
-/* =======================================================
-SLIDERS
-======================================================= */
-
-/* labels */
-
-.stSlider label {
-
-    color: white !important;
-
-    font-size: 16px !important;
-}
-
-/* numbers */
-
-.stSlider div {
-
-    color: white !important;
-}
-
-/* =======================================================
-INPUTS
-======================================================= */
-
-input {
-
-    color: white !important;
-}
-
-/* =======================================================
-SUCCESS / ALERTS
-======================================================= */
+/* ---------------- ALERTS ---------------- */
 
 .stSuccess,
 .stInfo,
@@ -289,13 +215,23 @@ SUCCESS / ALERTS
 .stError {
 
     border-radius: 18px !important;
-
-    color: white !important;
 }
 
-/* =======================================================
-SCROLLBAR
-======================================================= */
+/* ---------------- IMAGES ---------------- */
+
+img {
+
+    border-radius: 18px;
+}
+
+/* ---------------- FOOTER ---------------- */
+
+footer {
+
+    visibility: hidden;
+}
+
+/* ---------------- SCROLLBAR ---------------- */
 
 ::-webkit-scrollbar {
 
@@ -312,16 +248,38 @@ SCROLLBAR
     border-radius: 20px;
 }
 
-/* =======================================================
-FOOTER
-======================================================= */
-
-footer {
-
-    visibility: hidden;
-}
-
 </style>
+""", unsafe_allow_html=True)
+
+# =========================================================
+# HERO SECTION
+# =========================================================
+
+st.markdown("""
+<div style="
+background: rgba(255,255,255,0.06);
+padding:40px;
+border-radius:30px;
+backdrop-filter: blur(20px);
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:25px;
+">
+
+<h2 style="
+font-size:36px;
+margin-bottom:10px;
+">
+🧠 AI Student Performance Dashboard
+</h2>
+
+<p style="
+font-size:18px;
+color:#d8b4fe;
+">
+Жасалма интеллект аркылуу окуучулардын жетишкендигин анализдөө жана болжолдоо
+</p>
+
+</div>
 """, unsafe_allow_html=True)
 
 # =========================================================
