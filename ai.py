@@ -71,7 +71,7 @@ section[data-testid="stSidebar"] {
 
 section[data-testid="stSidebar"] * {
 
-    color: #ffffff !important;
+    color: #a398b5 !important;
 }
 
 /* =======================================================
