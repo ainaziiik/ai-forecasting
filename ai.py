@@ -34,291 +34,74 @@ st.markdown("""
 /* =======================================================
 BACKGROUND
 ======================================================= */
+
 .stApp {
+
     background:
         radial-gradient(circle at top left, #7c3aed 0%, transparent 25%),
         radial-gradient(circle at bottom right, #a855f7 0%, transparent 25%),
         linear-gradient(135deg, #0f0f1a, #151528, #1e1b4b);
+
     color: white;
 }
 
 /* =======================================================
 GLOBAL TEXT
 ======================================================= */
-html, body, [class*="css"] {
+
+html, body, [class*="css"]  {
+
     color: #f5f3ff !important;
 }
 
 /* =======================================================
 SIDEBAR
 ======================================================= */
+
 section[data-testid="stSidebar"] {
-    background: rgba(17, 24, 39, 0.78);
+
+    background: rgba(17, 24, 39, 0.75);
+
     backdrop-filter: blur(20px);
+
     border-right: 1px solid rgba(255,255,255,0.08);
 }
 
+/* Sidebar text */
+
 section[data-testid="stSidebar"] * {
+
     color: #ffffff !important;
 }
 
 /* =======================================================
 HEADINGS
 ======================================================= */
+
 h1 {
+
     color: white !important;
+
     font-size: 52px !important;
+
     font-weight: 800 !important;
 }
 
 h2, h3 {
+
     color: #ffffff !important;
 }
 
 /* =======================================================
 HERO CARD
 ======================================================= */
-.hero {
-    background: rgba(15,15,26,0.58);
-    border-radius: 30px;
-    padding: 40px;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.10);
-    margin-bottom: 25px;
-}
-
-/* =======================================================
-METRICS
-======================================================= */
-div[data-testid="metric-container"] {
-    background: rgba(15, 15, 26, 0.72) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    padding: 22px !important;
-    border-radius: 24px !important;
-    backdrop-filter: blur(18px);
-    box-shadow: 0 8px 30px rgba(124,58,237,0.28);
-}
-
-div[data-testid="metric-container"] label,
-div[data-testid="metric-container"] p {
-    color: rgba(255,255,255,0.82) !important;
-    font-weight: 500 !important;
-}
-
-div[data-testid="metric-container"] [data-testid="stMetricValue"] {
-    color: white !important;
-    font-size: 42px !important;
-    font-weight: 800 !important;
-}
-
-div[data-testid="metric-container"] * {
-    color: white !important;
-}
-
-div[data-testid="column"] {
-    padding: 8px;
-}
-
-/* =======================================================
-TABS
-======================================================= */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 14px;
-}
-
-.stTabs [data-baseweb="tab"] {
-    background: rgba(255,255,255,0.06);
-    border-radius: 16px;
-    padding: 12px 24px;
-    color: white !important;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: 0.3s;
-}
-
-.stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
-    color: white !important;
-}
-
-/* =======================================================
-DATAFRAME
-======================================================= */
-[data-testid="stDataFrame"] {
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-/* =======================================================
-BUTTONS
-======================================================= */
-.stButton > button {
-    background: linear-gradient(135deg, #7c3aed, #c084fc);
-    color: white !important;
-    border: none;
-    border-radius: 18px;
-    padding: 12px 26px;
-    font-size: 15px;
-    font-weight: 600;
-    transition: 0.3s;
-    box-shadow: 0 6px 20px rgba(124,58,237,0.35);
-}
-
-.stButton > button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 30px rgba(168,85,247,0.45);
-}
-
-/* =======================================================
-UPLOAD
-======================================================= */
-[data-testid="stFileUploader"] {
-    background: rgba(255,255,255,0.10) !important;
-    border-radius: 22px;
-    padding: 18px;
-    border: 1px dashed rgba(192,132,252,0.65) !important;
-    backdrop-filter: blur(14px);
-}
-
-[data-testid="stFileUploaderDropzone"] {
-    background: rgba(15,15,26,0.58) !important;
-    border-radius: 18px !important;
-    border: 1px dashed rgba(192,132,252,0.45) !important;
-}
-
-[data-testid="stFileUploader"] section {
-    background: rgba(15,15,26,0.82) !important;
-    border-radius: 16px !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
-    padding: 8px !important;
-}
-
-[data-testid="stFileUploader"] * {
-    color: white !important;
-}
-
-[data-testid="stFileUploader"] button {
-    background: linear-gradient(135deg, #7c3aed, #c084fc) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 14px !important;
-}
-
-[data-testid="stFileUploader"] svg {
-    fill: white !important;
-    color: white !important;
-}
-
-/* =======================================================
-SLIDERS
-======================================================= */
-.stSlider label {
-    color: white !important;
-    font-size: 16px !important;
-}
-
-.stSlider div {
-    color: white !important;
-}
-
-/* =======================================================
-INPUTS
-======================================================= */
-input, textarea {
-    color: white !important;
-    background: rgba(255,255,255,0.06) !important;
-}
-
-/* =======================================================
-SELECTBOX
-======================================================= */
-div[data-baseweb="select"] > div {
-    background: rgba(255,255,255,0.06) !important;
-    color: white !important;
-    border-radius: 14px !important;
-}
-
-/* =======================================================
-ALERTS
-======================================================= */
-.stSuccess,
-.stInfo,
-.stWarning,
-.stError {
-    border-radius: 18px !important;
-    color: white !important;
-}
-
-/* =======================================================
-SCROLLBAR
-======================================================= */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(#7c3aed, #c084fc);
-    border-radius: 20px;
-}
-
-/* =======================================================
-FOOTER
-======================================================= */
-footer {
-    visibility: hidden;
-}
-
-/* =======================================================
-HEADER
-======================================================= */
-header {
-    background: transparent !important;
-}
-
-/* =======================================================
-MAIN BLOCK
-======================================================= */
-.block-container {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-/* =======================================================
-TABLES
-======================================================= */
-table {
-    color: white !important;
-}
-
-/* =======================================================
-EXPANDER
-======================================================= */
-.streamlit-expanderHeader {
-    color: white !important;
-    background: rgba(255,255,255,0.05) !important;
-    border-radius: 14px !important;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-# =========================================================
-# HERO SECTION
-# =========================================================
-
 st.markdown("""
-<div style="
-background: rgba(255,255,255,0.06);
-padding:40px;
-border-radius:30px;
-backdrop-filter: blur(20px);
-border:1px solid rgba(255,255,255,0.08);
-margin-bottom:25px;
-">
+<div class="hero">
 
 <h2 style="
 font-size:36px;
 margin-bottom:10px;
+color:white;
 ">
 🧠 AI Student Performance Dashboard
 </h2>
@@ -331,6 +114,214 @@ color:#d8b4fe;
 </p>
 
 </div>
+""", unsafe_allow_html=True)
+/* =======================================================
+METRICS
+======================================================= */
+
+div[data-testid="metric-container"] {
+
+    background: rgba(255,255,255,0.07);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    padding: 20px;
+
+    border-radius: 24px;
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 8px 30px rgba(124,58,237,0.25);
+}
+
+/* Metric text */
+
+div[data-testid="metric-container"] * {
+
+    color: white !important;
+}
+
+/* =======================================================
+TABS
+======================================================= */
+
+.stTabs [data-baseweb="tab-list"] {
+
+    gap: 14px;
+}
+
+.stTabs [data-baseweb="tab"] {
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 16px;
+
+    padding: 12px 24px;
+
+    color: white !important;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    transition: 0.3s;
+}
+
+.stTabs [aria-selected="true"] {
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #a855f7
+    ) !important;
+
+    color: white !important;
+}
+
+/* =======================================================
+DATAFRAME
+======================================================= */
+
+[data-testid="stDataFrame"] {
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* =======================================================
+BUTTONS
+======================================================= */
+
+.stButton>button {
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #c084fc
+    );
+
+    color: white !important;
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 12px 26px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 6px 20px rgba(124,58,237,0.35);
+}
+
+.stButton>button:hover {
+
+    transform: scale(1.03);
+
+    box-shadow:
+        0 10px 30px rgba(168,85,247,0.45);
+}
+
+/* =======================================================
+UPLOAD
+======================================================= */
+
+[data-testid="stFileUploader"] {
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 22px;
+
+    padding: 18px;
+
+    border: 1px dashed rgba(192,132,252,0.5);
+}
+
+/* upload text */
+
+[data-testid="stFileUploader"] * {
+
+    color: white !important;
+}
+
+/* =======================================================
+SLIDERS
+======================================================= */
+
+/* labels */
+
+.stSlider label {
+
+    color: white !important;
+
+    font-size: 16px !important;
+}
+
+/* numbers */
+
+.stSlider div {
+
+    color: white !important;
+}
+
+/* =======================================================
+INPUTS
+======================================================= */
+
+input {
+
+    color: white !important;
+}
+
+/* =======================================================
+SUCCESS / ALERTS
+======================================================= */
+
+.stSuccess,
+.stInfo,
+.stWarning,
+.stError {
+
+    border-radius: 18px !important;
+
+    color: white !important;
+}
+
+/* =======================================================
+SCROLLBAR
+======================================================= */
+
+::-webkit-scrollbar {
+
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: linear-gradient(
+        #7c3aed,
+        #c084fc
+    );
+
+    border-radius: 20px;
+}
+
+/* =======================================================
+FOOTER
+======================================================= */
+
+footer {
+
+    visibility: hidden;
+}
+
+</style>
 """, unsafe_allow_html=True)
 
 # =========================================================
