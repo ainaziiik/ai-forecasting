@@ -32,18 +32,38 @@ st.markdown("""
 <style>
 
 /* =======================================================
-BACKGROUND
+FIX: FILE UPLOADER (светлый блок → тёмный glassmorphism)
 ======================================================= */
 
-.stApp {
-
-    background:
-        radial-gradient(circle at top left, #7c3aed 0%, transparent 25%),
-        radial-gradient(circle at bottom right, #a855f7 0%, transparent 25%),
-        linear-gradient(135deg, #0f0f1a, #151528, #1e1b4b);
-
-    color: white;
+[data-testid="stFileUploader"] {
+    background: rgba(255,255,255,0.10) !important;
+    border-radius: 22px;
+    padding: 18px;
+    border: 1px dashed rgba(192,132,252,0.65) !important;
+    backdrop-filter: blur(14px);
 }
+
+/* Внутренний белый контейнер с файлом */
+[data-testid="stFileUploader"] section {
+    background: rgba(15, 15, 26, 0.75) !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* Название файла */
+[data-testid="stFileUploader"] section div,
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploader"] span,
+[data-testid="stFileUploader"] p {
+    color: white !important;
+}
+
+/* Иконка файла */
+[data-testid="stFileUploader"] svg {
+    fill: white !important;
+    color: white !important;
+}
+
 
 /* =======================================================
 GLOBAL TEXT
@@ -116,26 +136,49 @@ METRICS
 ======================================================= */
 
 div[data-testid="metric-container"] {
-
-    background: rgba(255,255,255,0.07);
-
-    border: 1px solid rgba(255,255,255,0.08);
-
-    padding: 20px;
-
-    border-radius: 24px;
-
+    background: rgba(15, 15, 26, 0.72) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    padding: 22px !important;
+    border-radius: 24px !important;
     backdrop-filter: blur(18px);
-
     box-shadow:
-        0 8px 30px rgba(124,58,237,0.25);
+        0 8px 30px rgba(124,58,237,0.28);
 }
 
-/* Metric text */
+/* Верхний label (Окуучулар, Орточо баа...) */
+div[data-testid="metric-container"] label,
+div[data-testid="metric-container"] p {
+    color: rgba(255,255,255,0.82) !important;
+    font-weight: 500 !important;
+}
 
-div[data-testid="metric-container"] * {
-
+/* Основное число */
+div[data-testid="metric-container"] [data-testid="stMetricValue"] {
     color: white !important;
+    font-size: 42px !important;
+    font-weight: 800 !important;
+}
+
+/* Delta / дополнительные элементы */
+div[data-testid="metric-container"] * {
+    color: white !important;
+}
+
+/* =======================================================
+EXTRA: Сделать колонки визуально отделёнными
+======================================================= */
+
+div[data-testid="column"] {
+    padding: 8px;
+}
+
+/* =======================================================
+OPTIONAL: Hero card чуть темнее для контраста
+======================================================= */
+
+.hero {
+    background: rgba(15,15,26,0.58) !important;
+    border: 1px solid rgba(255,255,255,0.10) !important;
 }
 
 /* =======================================================
