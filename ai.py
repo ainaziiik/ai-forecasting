@@ -24,8 +24,151 @@ st.set_page_config(
     layout="wide"
 )
 
+# ---------------------------------------------------
+# CUSTOM CSS
+# ---------------------------------------------------
+
+st.markdown("""
+<style>
+
+/* Основной фон */
+.stApp {
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #111827,
+        #1e293b
+    );
+    color: white;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background: linear-gradient(
+        180deg,
+        #111827,
+        #1e293b
+    );
+    border-right: 1px solid #334155;
+}
+
+/* Заголовок */
+h1 {
+    color: #38bdf8;
+    text-align: center;
+    font-size: 42px !important;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+/* Подзаголовки */
+h2, h3 {
+    color: #f8fafc;
+}
+
+/* Карточки */
+div[data-testid="metric-container"] {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 20px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background-color: #1e293b;
+    border-radius: 12px;
+    color: white;
+    padding: 10px 20px;
+}
+
+.stTabs [aria-selected="true"] {
+    background-color: #0ea5e9 !important;
+    color: white !important;
+}
+
+/* Таблицы */
+[data-testid="stDataFrame"] {
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #334155;
+}
+
+/* Кнопки */
+.stButton>button {
+    background: linear-gradient(
+        90deg,
+        #0ea5e9,
+        #2563eb
+    );
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.stButton>button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(14,165,233,0.5);
+}
+
+/* Upload */
+[data-testid="stFileUploader"] {
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    padding: 15px;
+    border: 1px dashed #38bdf8;
+}
+
+/* Графики */
+.element-container img {
+    border-radius: 15px;
+}
+
+/* Footer */
+footer {
+    visibility: hidden;
+}
+
+/* Скролл */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #38bdf8;
+    border-radius: 10px;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 st.title("Жасалма интеллект технологияларын колдонуу менен студенттердин жетишүүсүн болжолдуу аныктоо (прогноздоо)")
-st.markdown("---")
+st.markdown("""
+<div style="
+    background: rgba(255,255,255,0.08);
+    padding: 25px;
+    border-radius: 20px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.1);
+    margin-bottom:20px;
+">
+    <h2 style="color:#38bdf8;">
+        🤖 Жасалма интеллект аркылуу окуучулардын жетишкендигин анализдөө
+    </h2>
+    <p style="font-size:18px; color:#cbd5e1;">
+        Machine Learning • Data Science • Streamlit Dashboard
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 # ---------------------------------------------------
 # KYRGYZ COLUMN NAMES
