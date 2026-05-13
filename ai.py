@@ -618,7 +618,7 @@ if uploaded_file is not None:
         # 2-ТАБ
         # =====================================================
 
-                with tab2:
+        with tab2:
 
             st.subheader("🏆 Моделдерди салыштыруу")
 
