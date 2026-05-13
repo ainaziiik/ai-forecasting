@@ -482,8 +482,7 @@ if uploaded_file is not None:
         # =====================================================
         # 1-ТАБ
         # =====================================================
-
-        with tab1:
+with tab1:
 
             st.subheader("📋 Маалыматтар таблицасы")
 
@@ -499,38 +498,38 @@ if uploaded_file is not None:
             st.dataframe(preview_df.head(10))
 
         # =====================================================
-# HEATMAP
-# =====================================================
+        # HEATMAP
+        # =====================================================
 
-st.subheader("🔥 Факторлордун байланышы")
+        st.subheader("🔥 Факторлордун байланышы")
 
-numeric_df = df.select_dtypes(include=[np.number])
+        numeric_df = df.select_dtypes(include=[np.number])
 
-fig_corr, ax_corr = plt.subplots(figsize=(12, 6))
+        fig_corr, ax_corr = plt.subplots(figsize=(12, 6))
 
-sns.heatmap(
-    numeric_df.corr(),
-    cmap='magma',
-    ax=ax_corr
-)
+        sns.heatmap(
+        numeric_df.corr(),
+        cmap='magma',
+        ax=ax_corr
+        )
 
-st.pyplot(fig_corr)
+        st.pyplot(fig_corr)
+        
+        # =====================================================
+        # ГРАФИК
+        # =====================================================
+        
+        st.subheader("📈 Баалардын бөлүштүрүлүшү")
+        
+        fig_hist, ax_hist = plt.subplots(figsize=(8, 4))
+        
+        sns.histplot(
+            df['G3'],
+            kde=True,
+            ax=ax_hist
+        )
 
-# =====================================================
-# ГРАФИК
-# =====================================================
-
-st.subheader("📈 Баалардын бөлүштүрүлүшү")
-
-fig_hist, ax_hist = plt.subplots(figsize=(8, 4))
-
-sns.histplot(
-    df['G3'],
-    kde=True,
-    ax=ax_hist
-)
-
-st.pyplot(fig_hist)
+        st.pyplot(fig_hist)
 
         # =====================================================
         # МААЛЫМАТТЫ ДАЯРДОО
@@ -619,7 +618,7 @@ st.pyplot(fig_hist)
         # 2-ТАБ
         # =====================================================
 
-        with tab2:
+with tab2:
 
             st.subheader("🏆 Моделдерди салыштыруу")
 
