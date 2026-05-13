@@ -39,17 +39,22 @@ if uploaded_file is not None:
         st.pyplot(fig_corr)
 
     with tab2:
-      
-        data = df.copy()
-        le = LabelEncoder()
-        for col in data.columns:
-            if data[col].dtype == 'object':
-                data[col] = le.fit_transform(data[col])
-        
-        data['target'] = data['G3'].apply(lambda x: 1 if x >= 10 else 0)
-        X = data.drop(['G3', 'target', 'G1', 'G2'], axis=1)
-        y = data['target']
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    data = df.copy()
+
+    le = LabelEncoder()
+    for col in data.columns:
+        if data[col].dtype == 'object':
+            data[col] = le.fit_transform(data[col].astype(str))
+
+    data = data.fillna(0)
+
+    data['target'] = data['G3'].apply(lambda x: 1 if x >= 10 else 0)
+
+    X = data.drop(['G3', 'target', 'G1', 'G2'], axis=1)
+    y = data['target']
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
         model = RandomForestClassifier(n_estimators=100, random_state=42)
         model.fit(X_train, y_train)
