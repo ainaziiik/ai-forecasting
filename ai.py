@@ -458,17 +458,17 @@ if uploaded_file is not None:
         col1, col2, col3 = st.columns(3)
 
         col1.metric(
-            "👨‍🎓 Окуучулар",
+            "Окуучулар",
             len(df)
         )
 
         col2.metric(
-            "📊 Орточо баа",
+            "Орточо баа",
             round(df['G3'].mean(), 2)
         )
 
         col3.metric(
-            "📚 Колонкалар",
+            "Колонкалар",
             len(df.columns)
         )
 
@@ -477,9 +477,9 @@ if uploaded_file is not None:
         # =====================================================
 
         tab1, tab2, tab3 = st.tabs([
-            "📊 Анализ",
-            "🤖 AI Моделдер",
-            "🔮 Прогноз"
+            "Анализ",
+            "AI Моделдер",
+            "Прогноз"
         ])
 
         # =====================================================
@@ -504,7 +504,7 @@ if uploaded_file is not None:
             # HEATMAP
             # =====================================================
 
-            st.subheader("🔥 Факторлордун байланышы")
+            st.subheader("Факторлордун байланышы")
 
             numeric_df = df.select_dtypes(include=[np.number])
 
@@ -623,7 +623,7 @@ if uploaded_file is not None:
 
         with tab2:
 
-            st.subheader("🏆 Моделдерди салыштыруу")
+            st.subheader("Моделдерди салыштыруу")
 
             results_df = pd.DataFrame({
                 "Модель": results.keys(),
@@ -666,7 +666,7 @@ if uploaded_file is not None:
 
             if hasattr(best_model, 'feature_importances_'):
 
-                st.subheader("📌 Маанилүү факторлор")
+                st.subheader("Маанилүү факторлор")
 
                 importances = best_model.feature_importances_
 
@@ -693,7 +693,7 @@ if uploaded_file is not None:
             # CONFUSION MATRIX
             # =====================================================
 
-            st.subheader("🎯 Confusion Matrix")
+            st.subheader("Confusion Matrix")
 
             cm = confusion_matrix(
                 y_test,
@@ -760,7 +760,7 @@ if uploaded_file is not None:
                 0
             )
 
-            if st.button("🤖 Прогноз жасоо"):
+            if st.button("Прогноз жасоо"):
 
                 input_data = np.zeros(len(X.columns))
 
@@ -784,7 +784,7 @@ if uploaded_file is not None:
                 if prediction == 1:
 
                     st.success(
-                        "🎉 Окуучу ийгиликтүү өтүшү мүмкүн!"
+                        "Окуучу ийгиликтүү өтүшү мүмкүн!"
                     )
 
                 else:
