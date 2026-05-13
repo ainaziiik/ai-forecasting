@@ -633,6 +633,96 @@ st.pyplot(fig_hist)
 
             st.dataframe(results_df)
 
+# =====================================================
+# ГРАФИК МОДЕЛДЕР
+# =====================================================
+
+fig_bar, ax_bar = plt.subplots(figsize=(8, 5))
+
+pd.Series(results).sort_values().plot(
+    kind='barh',
+    ax=ax_bar
+)
+
+ax_bar.set_xlabel("Тактык")
+
+st.pyplot(fig_bar)
+
+# =====================================================
+# ЭҢ МЫКТЫ МОДЕЛЬ
+# =====================================================
+
+st.success(
+    f"✨ Эң жакшы модель: "
+    f"{best_model_name} "
+    f"({best_accuracy:.2%})"
+)
+
+# =====================================================
+# FEATURE IMPORTANCE
+# =====================================================
+
+if hasattr(best_model, 'feature_importances_'):
+
+    st.subheader("📌 Маанилүү факторлор")
+
+    importances = best_model.feature_importances_
+
+    display_features = [
+        kyrgyz_columns.get(c, c)
+        for c in X.columns
+    ]
+
+    feat_imp = pd.Series(
+        importances,
+        index=display_features
+    )
+
+    fig_f, ax_f = plt.subplots(figsize=(8, 5))
+
+    feat_imp.nlargest(10).sort_values().plot(
+        kind='barh',
+        ax=ax_f
+    )
+
+    st.pyplot(fig_f)
+
+# =====================================================
+# CONFUSION MATRIX
+# =====================================================
+
+st.subheader("🎯 Confusion Matrix")
+
+cm = confusion_matrix(
+    y_test,
+    best_predictions
+)
+
+fig_cm, ax_cm = plt.subplots(figsize=(5, 4))
+
+sns.heatmap(
+    cm,
+    annot=True,
+    fmt='d',
+    cmap='Purples',
+    ax=ax_cm
+)
+
+ax_cm.set_xlabel("Божомол")
+ax_cm.set_ylabel("Чыныгы жооп")
+
+st.pyplot(fig_cm)
+
+# =====================================================
+# DOWNLOAD BUTTON
+# =====================================================
+
+st.download_button(
+    "📥 Натыйжаларды жүктөө",
+    results_df.to_csv(index=False),
+    file_name="ai_results.csv"
+)
+
         # =====================================================
         # 3-ТАБ
         # =====================================================
