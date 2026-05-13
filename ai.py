@@ -15,21 +15,12 @@ from sklearn.naive_bayes import GaussianNB
 
 from sklearn.metrics import accuracy_score, confusion_matrix
 
-# =========================================================
-# PAGE CONFIG
-# =========================================================
-
+st.markdown("""
+<style>
 st.set_page_config(
     page_title="AI Student Dashboard",
     layout="wide"
 )
-
-# =========================================================
-# MODERN UI
-# =========================================================
-
-st.markdown("""
-<style>
 
 /* =======================================================
 BACKGROUND
