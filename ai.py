@@ -16,7 +16,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 # =========================================================
-# PAGE CONFIG
+# БЕТТИН ЖӨНДӨЛҮШҮ
 # =========================================================
 
 st.set_page_config(
@@ -25,15 +25,18 @@ st.set_page_config(
 )
 
 # =========================================================
-# MODERN UI
+# CSS СТИЛЬ
 # =========================================================
 
 st.markdown("""
 <style>
 
-/* ---------------- MAIN BACKGROUND ---------------- */
+/* =========================================================
+НЕГИЗГИ ФОН
+========================================================= */
 
 .stApp {
+
     background:
         radial-gradient(circle at top left, #7c3aed 0%, transparent 25%),
         radial-gradient(circle at bottom right, #a855f7 0%, transparent 25%),
@@ -42,44 +45,103 @@ st.markdown("""
     color: white;
 }
 
-/* ---------------- SIDEBAR ---------------- */
+/* =========================================================
+БАРДЫК ТЕКСТ
+========================================================= */
+
+html,
+body,
+[class*="css"] {
+
+    color: white !important;
+}
+
+/* =========================================================
+SIDEBAR
+========================================================= */
 
 section[data-testid="stSidebar"] {
 
-    background: rgba(255,255,255,0.05);
+    background: rgba(17, 24, 39, 0.82);
 
-    backdrop-filter: blur(18px);
+    backdrop-filter: blur(20px);
 
     border-right: 1px solid rgba(255,255,255,0.08);
+
+    padding-top: 20px;
 }
 
-/* ---------------- TITLE ---------------- */
+/* Sidebar текст */
+
+section[data-testid="stSidebar"] * {
+
+    color: white !important;
+}
+
+/* =========================================================
+БАШКАРУУ ПАНЕЛИ
+========================================================= */
+
+section[data-testid="stSidebar"] h1 {
+
+    background: rgba(255,255,255,0.06);
+
+    padding: 18px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    margin-bottom: 20px;
+
+    font-size: 38px !important;
+}
+
+/* =========================================================
+ЗАГОЛОВОК
+========================================================= */
 
 h1 {
+
+    color: white !important;
 
     font-size: 52px !important;
 
     font-weight: 800 !important;
-
-    text-align: center;
-
-    color: white;
-
-    margin-bottom: 10px;
 }
 
-/* ---------------- HEADINGS ---------------- */
+h2,
+h3 {
 
-h2, h3 {
-
-    color: #f5f3ff;
+    color: white !important;
 }
 
-/* ---------------- GLASS CARDS ---------------- */
+/* =========================================================
+HERO БЛОК
+========================================================= */
+
+.hero {
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 30px;
+
+    padding: 40px;
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    margin-bottom: 25px;
+}
+
+/* =========================================================
+KPI КАРТОЧКАЛАРЫ
+========================================================= */
 
 div[data-testid="metric-container"] {
 
-    background: rgba(255,255,255,0.08);
+    background: rgba(15,15,26,0.72) !important;
 
     border: 1px solid rgba(255,255,255,0.12);
 
@@ -90,24 +152,34 @@ div[data-testid="metric-container"] {
     backdrop-filter: blur(18px);
 
     box-shadow:
-        0 8px 32px rgba(124,58,237,0.25);
-
-    transition: 0.3s ease;
+        0 8px 30px rgba(124,58,237,0.28);
 }
 
-div[data-testid="metric-container"]:hover {
+/* KPI текст */
 
-    transform: translateY(-4px);
+div[data-testid="metric-container"] * {
 
-    box-shadow:
-        0 12px 40px rgba(168,85,247,0.35);
+    color: white !important;
 }
 
-/* ---------------- TABS ---------------- */
+/* KPI цифра */
+
+div[data-testid="stMetricValue"] {
+
+    color: white !important;
+
+    font-size: 42px !important;
+
+    font-weight: 800 !important;
+}
+
+/* =========================================================
+TAB
+========================================================= */
 
 .stTabs [data-baseweb="tab-list"] {
 
-    gap: 15px;
+    gap: 14px;
 }
 
 .stTabs [data-baseweb="tab"] {
@@ -118,16 +190,11 @@ div[data-testid="metric-container"]:hover {
 
     padding: 12px 24px;
 
-    color: white;
+    color: white !important;
 
     border: 1px solid rgba(255,255,255,0.08);
 
     transition: 0.3s;
-}
-
-.stTabs [data-baseweb="tab"]:hover {
-
-    background: rgba(168,85,247,0.2);
 }
 
 .stTabs [aria-selected="true"] {
@@ -141,24 +208,24 @@ div[data-testid="metric-container"]:hover {
     color: white !important;
 }
 
-/* ---------------- DATAFRAME ---------------- */
+/* =========================================================
+ТАБЛИЦА
+========================================================= */
 
 [data-testid="stDataFrame"] {
 
-    background: rgba(255,255,255,0.06);
-
-    border-radius: 22px;
+    border-radius: 20px;
 
     overflow: hidden;
 
     border: 1px solid rgba(255,255,255,0.08);
-
-    backdrop-filter: blur(14px);
 }
 
-/* ---------------- BUTTONS ---------------- */
+/* =========================================================
+БАСМА
+========================================================= */
 
-.stButton>button {
+.stButton > button {
 
     background: linear-gradient(
         135deg,
@@ -166,7 +233,7 @@ div[data-testid="metric-container"]:hover {
         #c084fc
     );
 
-    color: white;
+    color: white !important;
 
     border: none;
 
@@ -184,30 +251,88 @@ div[data-testid="metric-container"]:hover {
         0 6px 20px rgba(124,58,237,0.35);
 }
 
-.stButton>button:hover {
+/* Hover */
 
-    transform: scale(1.04);
+.stButton > button:hover {
+
+    transform: scale(1.03);
 
     box-shadow:
         0 10px 30px rgba(168,85,247,0.45);
 }
 
-/* ---------------- FILE UPLOADER ---------------- */
+/* =========================================================
+DOWNLOAD BUTTON
+========================================================= */
+
+[data-testid="stDownloadButton"] button {
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #c084fc
+    ) !important;
+
+    color: white !important;
+
+    border: none !important;
+
+    border-radius: 18px !important;
+
+    padding: 12px 24px !important;
+
+    font-weight: 600 !important;
+}
+
+/* =========================================================
+UPLOAD
+========================================================= */
 
 [data-testid="stFileUploader"] {
 
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.08);
 
     border-radius: 22px;
 
-    padding: 20px;
+    padding: 18px;
 
-    border: 1px dashed rgba(192,132,252,0.5);
+    border: 1px dashed rgba(192,132,252,0.65);
 
-    backdrop-filter: blur(10px);
+    margin-top: 10px;
 }
 
-/* ---------------- ALERTS ---------------- */
+/* Upload ичиндеги текст */
+
+[data-testid="stFileUploader"] * {
+
+    color: white !important;
+}
+
+/* =========================================================
+SLIDER
+========================================================= */
+
+/* Slider текст */
+
+.stSlider label {
+
+    color: white !important;
+
+    font-size: 17px !important;
+
+    font-weight: 600 !important;
+}
+
+/* Slider сандары */
+
+.stSlider div {
+
+    color: white !important;
+}
+
+/* =========================================================
+SUCCESS / ERROR
+========================================================= */
 
 .stSuccess,
 .stInfo,
@@ -215,23 +340,13 @@ div[data-testid="metric-container"]:hover {
 .stError {
 
     border-radius: 18px !important;
+
+    color: white !important;
 }
 
-/* ---------------- IMAGES ---------------- */
-
-img {
-
-    border-radius: 18px;
-}
-
-/* ---------------- FOOTER ---------------- */
-
-footer {
-
-    visibility: hidden;
-}
-
-/* ---------------- SCROLLBAR ---------------- */
+/* =========================================================
+SCROLLBAR
+========================================================= */
 
 ::-webkit-scrollbar {
 
@@ -248,26 +363,38 @@ footer {
     border-radius: 20px;
 }
 
+/* =========================================================
+FOOTER
+========================================================= */
+
+footer {
+
+    visibility: hidden;
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+
+header {
+
+    background: transparent !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
 # =========================================================
-# HERO SECTION
+# HERO БЛОК
 # =========================================================
 
 st.markdown("""
-<div style="
-background: rgba(255,255,255,0.06);
-padding:40px;
-border-radius:30px;
-backdrop-filter: blur(20px);
-border:1px solid rgba(255,255,255,0.08);
-margin-bottom:25px;
-">
+<div class="hero">
 
 <h2 style="
 font-size:36px;
 margin-bottom:10px;
+color:white;
 ">
 🧠 AI Student Performance Dashboard
 </h2>
@@ -283,7 +410,7 @@ color:#d8b4fe;
 """, unsafe_allow_html=True)
 
 # =========================================================
-# KYRGYZ NAMES
+# КЫРГЫЗЧА АТТАР
 # =========================================================
 
 kyrgyz_columns = {
@@ -296,11 +423,7 @@ kyrgyz_columns = {
     'Fedu': 'Атасынын билими',
     'Mjob': 'Апасынын жумушу',
     'Fjob': 'Атасынын жумушу',
-    'failures': 'Ийгиликсиздик',
-    'goout': 'Сыртка чыгуу',
-    'freetime': 'Бош убакыт',
-    'health': 'Ден соолук',
-    'traveltime': 'Жолго кеткен убакыт'
+    'failures': 'Ийгиликсиздик'
 }
 
 # =========================================================
@@ -310,23 +433,20 @@ kyrgyz_columns = {
 st.sidebar.title("⚙️ Башкаруу панели")
 
 uploaded_file = st.sidebar.file_uploader(
-    "CSV файлын жүктөңүз",
+    "📂 CSV файлын жүктөө",
     type="csv"
 )
 
 # =========================================================
-# MAIN
+# НЕГИЗГИ БӨЛҮК
 # =========================================================
 
 if uploaded_file is not None:
 
     try:
 
+        # CSV файлды окуу
         df = pd.read_csv(uploaded_file, sep=';')
-
-        if df.empty:
-            st.error("CSV файлы бош.")
-            st.stop()
 
         # =====================================================
         # KPI
@@ -350,7 +470,7 @@ if uploaded_file is not None:
         )
 
         # =====================================================
-        # TABS
+        # TAB
         # =====================================================
 
         tab1, tab2, tab3 = st.tabs([
@@ -360,20 +480,16 @@ if uploaded_file is not None:
         ])
 
         # =====================================================
-        # TAB 1
+        # 1-ТАБ
         # =====================================================
 
         with tab1:
 
             st.subheader("📋 Маалыматтар таблицасы")
 
-            preview_cols = [
-                col for col in
+            preview_df = df[
                 ['age', 'sex', 'studytime', 'absences', 'G3']
-                if col in df.columns
-            ]
-
-            preview_df = df[preview_cols].copy()
+            ].copy()
 
             preview_df.rename(
                 columns=kyrgyz_columns,
@@ -382,38 +498,8 @@ if uploaded_file is not None:
 
             st.dataframe(preview_df.head(10))
 
-            # -------------------------------------------------
-
-            st.subheader("🔥 Факторлордун байланышы")
-
-            numeric_df = df.select_dtypes(include=[np.number])
-
-            fig_corr, ax_corr = plt.subplots(figsize=(12, 6))
-
-            sns.heatmap(
-                numeric_df.corr(),
-                cmap='magma',
-                ax=ax_corr
-            )
-
-            st.pyplot(fig_corr)
-
-            # -------------------------------------------------
-
-            st.subheader("📈 Баалардын бөлүштүрүлүшү")
-
-            fig_hist, ax_hist = plt.subplots(figsize=(8, 4))
-
-            sns.histplot(
-                df['G3'],
-                kde=True,
-                ax=ax_hist
-            )
-
-            st.pyplot(fig_hist)
-
         # =====================================================
-        # DATA PREP
+        # МААЛЫМАТТЫ ДАЯРДОО
         # =====================================================
 
         data_clean = df.copy()
@@ -434,16 +520,16 @@ if uploaded_file is not None:
             lambda x: 1 if x >= 10 else 0
         )
 
-        drop_cols = [
-            col for col in ['G1', 'G2', 'G3', 'target']
-            if col in data_clean.columns
-        ]
-
-        X = data_clean.drop(drop_cols, axis=1)
+        X = data_clean.drop(
+            ['G1', 'G2', 'G3', 'target'],
+            axis=1,
+            errors='ignore'
+        )
 
         y = data_clean['target']
 
         X = X.apply(pd.to_numeric, errors='coerce')
+
         X = X.fillna(0)
 
         X_train, X_test, y_train, y_test = train_test_split(
@@ -454,7 +540,7 @@ if uploaded_file is not None:
         )
 
         # =====================================================
-        # MODELS
+        # МОДЕЛДЕР
         # =====================================================
 
         models = {
@@ -468,31 +554,35 @@ if uploaded_file is not None:
         results = {}
 
         best_model = None
+
         best_accuracy = 0
+
         best_predictions = None
+
         best_model_name = ""
 
-        with st.spinner("🤖 AI модель окутулууда..."):
+        for name, model in models.items():
 
-            for name, model in models.items():
+            model.fit(X_train, y_train)
 
-                model.fit(X_train, y_train)
+            y_pred = model.predict(X_test)
 
-                y_pred = model.predict(X_test)
+            accuracy = accuracy_score(y_test, y_pred)
 
-                accuracy = accuracy_score(y_test, y_pred)
+            results[name] = accuracy
 
-                results[name] = accuracy
+            if accuracy > best_accuracy:
 
-                if accuracy > best_accuracy:
+                best_accuracy = accuracy
 
-                    best_accuracy = accuracy
-                    best_model = model
-                    best_predictions = y_pred
-                    best_model_name = name
+                best_model = model
+
+                best_predictions = y_pred
+
+                best_model_name = name
 
         # =====================================================
-        # TAB 2
+        # 2-ТАБ
         # =====================================================
 
         with tab2:
@@ -509,95 +599,20 @@ if uploaded_file is not None:
 
             st.dataframe(results_df)
 
-            # -------------------------------------------------
-
-            fig_bar, ax_bar = plt.subplots(figsize=(8, 5))
-
-            pd.Series(results).sort_values().plot(
-                kind='barh',
-                ax=ax_bar
-            )
-
-            ax_bar.set_xlabel("Тактык")
-
-            st.pyplot(fig_bar)
-
-            # -------------------------------------------------
-
-            st.success(
-                f"✨ Эң жакшы модель: "
-                f"{best_model_name} "
-                f"({best_accuracy:.2%})"
-            )
-
-            # -------------------------------------------------
-
-            if hasattr(best_model, 'feature_importances_'):
-
-                st.subheader("📌 Маанилүү факторлор")
-
-                importances = best_model.feature_importances_
-
-                display_features = [
-                    kyrgyz_columns.get(c, c)
-                    for c in X.columns
-                ]
-
-                feat_imp = pd.Series(
-                    importances,
-                    index=display_features
-                )
-
-                fig_f, ax_f = plt.subplots(figsize=(8, 5))
-
-                feat_imp.nlargest(10).sort_values().plot(
-                    kind='barh',
-                    ax=ax_f
-                )
-
-                st.pyplot(fig_f)
-
-            # -------------------------------------------------
-
-            st.subheader("🎯 Confusion Matrix")
-
-            cm = confusion_matrix(
-                y_test,
-                best_predictions
-            )
-
-            fig_cm, ax_cm = plt.subplots(figsize=(5, 4))
-
-            sns.heatmap(
-                cm,
-                annot=True,
-                fmt='d',
-                cmap='Purples',
-                ax=ax_cm
-            )
-
-            ax_cm.set_xlabel("Божомол")
-            ax_cm.set_ylabel("Чыныгы жооп")
-
-            st.pyplot(fig_cm)
-
-            # -------------------------------------------------
-
-            st.download_button(
-                "📥 Натыйжаларды жүктөө",
-                results_df.to_csv(index=False),
-                file_name="ai_results.csv"
-            )
-
         # =====================================================
-        # TAB 3
+        # 3-ТАБ
         # =====================================================
 
         with tab3:
 
             st.subheader("🔮 Окуучунун жыйынтыгын болжолдоо")
 
-            age = st.slider("Жашы", 15, 22, 17)
+            age = st.slider(
+                "Жашы",
+                15,
+                22,
+                17
+            )
 
             studytime = st.slider(
                 "Окуу убактысы",
@@ -634,6 +649,7 @@ if uploaded_file is not None:
                 for i, col in enumerate(X.columns):
 
                     if col in feature_map:
+
                         input_data[i] = feature_map[col]
 
                 prediction = best_model.predict(
@@ -655,6 +671,7 @@ if uploaded_file is not None:
     except Exception as e:
 
         st.error("Ката пайда болду")
+
         st.exception(e)
 
 else:
