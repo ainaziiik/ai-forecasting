@@ -15,6 +15,19 @@ from sklearn.naive_bayes import GaussianNB
 
 from sklearn.metrics import accuracy_score, confusion_matrix
 
+# =========================================================
+# PAGE CONFIG
+# =========================================================
+
+st.set_page_config(
+    page_title="AI Student Dashboard",
+    layout="wide"
+)
+
+# =========================================================
+# MODERN UI
+# =========================================================
+
 st.markdown("""
 <style>
 
@@ -45,7 +58,6 @@ section[data-testid="stSidebar"] {
     border-right: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Sidebar text */
 section[data-testid="stSidebar"] * {
     color: #ffffff !important;
 }
@@ -87,26 +99,22 @@ div[data-testid="metric-container"] {
     box-shadow: 0 8px 30px rgba(124,58,237,0.28);
 }
 
-/* Верхние labels */
 div[data-testid="metric-container"] label,
 div[data-testid="metric-container"] p {
     color: rgba(255,255,255,0.82) !important;
     font-weight: 500 !important;
 }
 
-/* Основные цифры */
 div[data-testid="metric-container"] [data-testid="stMetricValue"] {
     color: white !important;
     font-size: 42px !important;
     font-weight: 800 !important;
 }
 
-/* Все элементы внутри */
 div[data-testid="metric-container"] * {
     color: white !important;
 }
 
-/* Отступы между колонками */
 div[data-testid="column"] {
     padding: 8px;
 }
@@ -164,8 +172,6 @@ BUTTONS
 /* =======================================================
 UPLOAD
 ======================================================= */
-
-/* Внешний контейнер */
 [data-testid="stFileUploader"] {
     background: rgba(255,255,255,0.10) !important;
     border-radius: 22px;
@@ -174,14 +180,12 @@ UPLOAD
     backdrop-filter: blur(14px);
 }
 
-/* Drag & drop зона */
 [data-testid="stFileUploaderDropzone"] {
     background: rgba(15,15,26,0.58) !important;
     border-radius: 18px !important;
     border: 1px dashed rgba(192,132,252,0.45) !important;
 }
 
-/* Белый блок с загруженным файлом */
 [data-testid="stFileUploader"] section {
     background: rgba(15,15,26,0.82) !important;
     border-radius: 16px !important;
@@ -189,16 +193,10 @@ UPLOAD
     padding: 8px !important;
 }
 
-/* Название файла + размер */
-[data-testid="stFileUploader"] small,
-[data-testid="stFileUploader"] span,
-[data-testid="stFileUploader"] p,
-[data-testid="stFileUploader"] label,
-[data-testid="stFileUploader"] div {
+[data-testid="stFileUploader"] * {
     color: white !important;
 }
 
-/* Кнопка Browse files */
 [data-testid="stFileUploader"] button {
     background: linear-gradient(135deg, #7c3aed, #c084fc) !important;
     color: white !important;
@@ -206,7 +204,6 @@ UPLOAD
     border-radius: 14px !important;
 }
 
-/* Иконки */
 [data-testid="stFileUploader"] svg {
     fill: white !important;
     color: white !important;
@@ -233,7 +230,7 @@ input, textarea {
 }
 
 /* =======================================================
-SELECTBOX / MULTISELECT
+SELECTBOX
 ======================================================= */
 div[data-baseweb="select"] > div {
     background: rgba(255,255,255,0.06) !important;
@@ -242,7 +239,7 @@ div[data-baseweb="select"] > div {
 }
 
 /* =======================================================
-SUCCESS / ALERTS
+ALERTS
 ======================================================= */
 .stSuccess,
 .stInfo,
@@ -272,25 +269,18 @@ footer {
 }
 
 /* =======================================================
-STREAMLIT HEADER
+HEADER
 ======================================================= */
 header {
     background: transparent !important;
 }
 
 /* =======================================================
-MAIN BLOCK PADDING
+MAIN BLOCK
 ======================================================= */
 .block-container {
     padding-top: 2rem;
     padding-bottom: 2rem;
-}
-
-/* =======================================================
-CARDS / CONTAINERS
-======================================================= */
-div[data-testid="stVerticalBlock"] > div:has(.element-container) {
-    border-radius: 20px;
 }
 
 /* =======================================================
@@ -310,6 +300,39 @@ EXPANDER
 }
 
 </style>
+""", unsafe_allow_html=True)
+
+# =========================================================
+# HERO SECTION
+# =========================================================
+
+st.markdown("""
+<div style="
+background: rgba(255,255,255,0.06);
+padding:40px;
+border-radius:30px;
+backdrop-filter: blur(20px);
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:25px;
+">
+
+<h2 style="
+font-size:36px;
+margin-bottom:10px;
+">
+🧠 AI Student Performance Dashboard
+</h2>
+
+<p style="
+font-size:18px;
+color:#d8b4fe;
+">
+Жасалма интеллект аркылуу окуучулардын жетишкендигин анализдөө жана болжолдоо
+</p>
+
+</div>
+""", unsafe_allow_html=True)
+
 # =========================================================
 # KYRGYZ NAMES
 # =========================================================
