@@ -16,22 +16,23 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 # =========================================================
-# БЕТТИН ЖӨНДӨЛҮШҮ
+# БАШКЫ БЕТ
 # =========================================================
 
 st.set_page_config(
-    page_title="AI Student Dashboard",
+    page_title="Жасалма интеллект технологияларын колдонуу менен студенттердин жетишүүсүн болжолдуу аныктоо",
     layout="wide"
 )
 
+
 # =========================================================
-# CSS СТИЛЬ (ЖАҢЫЛАНГАН)
+# CSS стилдери
 # =========================================================
 
 st.markdown("""
 <style>
 
-/* Основной фон приложения */
+/* Башкы фон */
 .stApp {
     background:
         radial-gradient(circle at top left, #7c3aed 0%, transparent 25%),
@@ -40,7 +41,9 @@ st.markdown("""
     color: white;
 }
 
-/* Цвет текста в метриках (Окуучулар, Орточо баа, Колонкалар) */
+
+
+/* Окуучулар, Орточо баа, Колонкалар */
 [data-testid="stMetricLabel"] p {
     color: white !important;
     font-size: 16px !important;
@@ -52,7 +55,9 @@ st.markdown("""
     font-weight: 800 !important;
 }
 
-/* Стиль обычных кнопок и кнопок загрузки */
+
+
+/* Баскычтар */
 .stButton > button, [data-testid="stDownloadButton"] button {
     background: linear-gradient(135deg, #7c3aed, #c084fc) !important;
     color: white !important;
@@ -61,39 +66,37 @@ st.markdown("""
     padding: 12px 26px !important;
     font-size: 15px !important;
     font-weight: 600 !important;
+
+
     
-    /* Плавный переход для всех свойств */
+    /* Переход */
     transition: all 0.3s ease-in-out !important;
     box-shadow: 0 6px 20px rgba(124,58,237,0.35) !important;
 }
 
-/* Эффект при наведении (Hover) */
+
+
+/* Хувер */
 .stButton > button:hover, [data-testid="stDownloadButton"] button:hover {
-    transform: translateY(-3px) scale(1.05) !important; /* Приподнимается и увеличивается */
-    background: linear-gradient(135deg, #a855f7, #d8b4fe) !important; /* Цвет становится ярче */
-    box-shadow: 0 10px 30px rgba(168,85,247,0.5) !important; /* Тень усиливается */
+    transform: translateY(-3px) scale(1.05) !important; 
+    background: linear-gradient(135deg, #a855f7, #d8b4fe) !important; 
+    box-shadow: 0 10px 30px rgba(168,85,247,0.5) !important; 
     cursor: pointer !important;
 }
 
-/* Эффект при нажатии (Active) */
+
+
+/* Баскандагы эффект */
 .stButton > button:active, [data-testid="stDownloadButton"] button:active {
     transform: translateY(1px) scale(0.98) !important;
 }
 
-/* Остальные стили для KPI карточек */
-div[data-testid="metric-container"] {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255,255,255,0.12);
-    padding: 22px;
-    border-radius: 24px;
-    backdrop-filter: blur(18px);
-}
 
 
 
-/* =========================================================
-НЕГИЗГИ ФОН
-========================================================= */
+
+
+/* Негизги фон */
 
 .stApp {
 
@@ -105,9 +108,9 @@ div[data-testid="metric-container"] {
     color: white;
 }
 
-/* =========================================================
-БАРДЫК ТЕКСТ
-========================================================= */
+
+
+/* Бардык текст */
 
 html,
 body,
@@ -116,9 +119,9 @@ body,
     color: white !important;
 }
 
-/* =========================================================
-SIDEBAR
-========================================================= */
+
+
+/* Sidebar */
 
 section[data-testid="stSidebar"] {
 
@@ -131,16 +134,18 @@ section[data-testid="stSidebar"] {
     padding-top: 20px;
 }
 
-/* Sidebar текст */
+
+
+/* Sidebar тексти */
 
 section[data-testid="stSidebar"] * {
 
     color: white !important;
 }
 
-/* =========================================================
-БАШКАРУУ ПАНЕЛИ
-========================================================= */
+
+
+/* Башкаруу панели */
 
 section[data-testid="stSidebar"] h1 {
 
@@ -157,9 +162,9 @@ section[data-testid="stSidebar"] h1 {
     font-size: 38px !important;
 }
 
-/* =========================================================
-ЗАГОЛОВОК
-========================================================= */
+
+
+/* Аталыш (заголовок) */
 
 h1 {
 
@@ -176,9 +181,9 @@ h3 {
     color: white !important;
 }
 
-/* =========================================================
-HERO БЛОК
-========================================================= */
+
+
+/* Негизги блок */
 
 .hero {
 
@@ -195,9 +200,9 @@ HERO БЛОК
     margin-bottom: 25px;
 }
 
-/* =========================================================
-KPI КАРТОЧКАЛАРЫ
-========================================================= */
+
+
+/* KPI карточкалары */
 
 div[data-testid="metric-container"] {
 
