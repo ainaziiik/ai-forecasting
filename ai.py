@@ -614,7 +614,7 @@ if uploaded_file is not None:
                 ax=ax_cm
             )
 
-            ax_cm.set_xlabel(""Болжолдонгон жыйынтык")
+            ax_cm.set_xlabel("Болжолдонгон жыйынтык")
             ax_cm.set_ylabel("Чыныгы жыйынтык")
 
             st.pyplot(fig_cm)
