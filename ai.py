@@ -575,7 +575,7 @@ if uploaded_file is not None:
                 f"{best_model_name} "
                 f"({best_accuracy:.2%})"
             )
-=
+
 
             if hasattr(best_model, 'feature_importances_'):
                 st.subheader("Маанилүү факторлор")
