@@ -16,15 +16,6 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 # =========================================================
-# Башкы бети
-# =========================================================
-
-st.set_page_config(
-    page_title="Жасалма интеллект технологияларын колдонуу менен студенттердин жетишүүсүн болжолдуу аныктоо",
-    layout="wide"
-)
-
-# =========================================================
 # CSS стилдери
 # =========================================================
 
@@ -65,17 +56,11 @@ st.markdown("""
     padding: 12px 26px !important;
     font-size: 15px !important;
     font-weight: 600 !important;
-
-
-    
-    /* Переход */
     transition: all 0.3s ease-in-out !important;
     box-shadow: 0 6px 20px rgba(124,58,237,0.35) !important;
 }
 
 
-
-/* Хувер */
 .stButton > button:hover, [data-testid="stDownloadButton"] button:hover {
     transform: translateY(-3px) scale(1.05) !important; 
     background: linear-gradient(135deg, #a855f7, #d8b4fe) !important; 
@@ -83,9 +68,6 @@ st.markdown("""
     cursor: pointer !important;
 }
 
-
-
-/* Баскандагы эффект */
 .stButton > button:active, [data-testid="stDownloadButton"] button:active {
     transform: translateY(1px) scale(0.98) !important;
 }
@@ -101,35 +83,22 @@ st.markdown("""
     color: white;
 }
 
-
-
-/* Бардык текст */
 html,
 body,
 [class*="css"] {
     color: white !important;
 }
 
-
-
-/* Sidebar */
 section[data-testid="stSidebar"] {
     background: rgba(17, 24, 39, 0.82);
     backdrop-filter: blur(20px);
     border-right: 1px solid rgba(255,255,255,0.08);
     padding-top: 20px;
 }
-
-
-
-/* Sidebar тексти */
 section[data-testid="stSidebar"] * {
     color: white !important;
 }
 
-
-
-/* Башкаруу панели */
 section[data-testid="stSidebar"] h1 {
     background: rgba(255,255,255,0.06);
     padding: 18px;
@@ -139,9 +108,6 @@ section[data-testid="stSidebar"] h1 {
     font-size: 38px !important;
 }
 
-
-
-/* Аталыш (заголовок) */
 h1 {
     color: white !important;
     font-size: 52px !important;
@@ -153,9 +119,6 @@ h3 {
     color: white !important;
 }
 
-
-
-/* Негизги блок */
 .hero {
     background: rgba(255,255,255,0.06);
     border-radius: 30px;
@@ -165,9 +128,6 @@ h3 {
     margin-bottom: 25px;
 }
 
-
-
-/* KPI карточкалары */
 div[data-testid="metric-container"] {
     background: rgba(15,15,26,0.72) !important;
     border: 1px solid rgba(255,255,255,0.12);
@@ -178,25 +138,16 @@ div[data-testid="metric-container"] {
         0 8px 30px rgba(124,58,237,0.28);
 }
 
-
-
-/* KPI тексти */
 div[data-testid="metric-container"] * {
     color: white !important;
 }
 
-
-
-/* KPI цифралары */
 div[data-testid="stMetricValue"] {
     color: white !important;
     font-size: 42px !important;
     font-weight: 800 !important;
 }
 
-
-
-/* БАШКЫ МААЛЫМАТТАР */
 .stTabs [data-baseweb="tab-list"] {
     gap: 14px;
 }
@@ -211,9 +162,9 @@ div[data-testid="stMetricValue"] {
 }
 
 .stTabs [data-baseweb="tab"]:hover {
-    background: rgba(255, 255, 255, 0.15) !important; /* Становится светлее */
-    transform: translateY(-2px) !important; /* Слегка приподнимается */
-    border-color: rgba(168, 85, 247, 0.5) !important; /* Появляется фиолетовое свечение у бордера */
+    background: rgba(255, 255, 255, 0.15) !important; 
+    transform: translateY(-2px) !important; 
+    border-color: rgba(168, 85, 247, 0.5) !important;
     cursor: pointer !important;
 }
 
@@ -225,11 +176,11 @@ div[data-testid="stMetricValue"] {
     ) !important;
     color: white !important;
     box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4) !important;
-    transform: translateY(0px) !important; /* Выбранная вкладка не «прыгает» */
+    transform: translateY(0px) !important;
 }
 
 .stTabs [data-baseweb="tab-highlight"] {
-    background-color: #a855f7 !important; /* Делаем линию под цвет бренда */
+    background-color: #a855f7 !important; 
 }
 
 
@@ -269,7 +220,6 @@ div[data-testid="stMetricValue"] {
         0 10px 30px rgba(168,85,247,0.45);
 }
 
-/* Жүктөө баскычы */
 [data-testid="stDownloadButton"] button {
     background: linear-gradient(
         135deg,
@@ -283,7 +233,6 @@ div[data-testid="stMetricValue"] {
     font-weight: 600 !important;
 }
 
-/*Жүктөө */
 [data-testid="stFileUploader"] {
     background: rgba(255,255,255,0.08);
     border-radius: 22px;
@@ -297,8 +246,6 @@ div[data-testid="stMetricValue"] {
 }
 
 
-
-/* Слайдер */
 .stSlider label {
     color: white !important;
     font-size: 17px !important;
@@ -310,8 +257,9 @@ div[data-testid="stMetricValue"] {
     color: white !important;
 }
 
-/* Ийгиликтүү же Ийгиликтүү эмеч*/
 
+
+/* Ийгиликтүү же Ийгиликтүү эмес*/
 .stSuccess,
 .stInfo,
 .stWarning,
@@ -319,7 +267,6 @@ div[data-testid="stMetricValue"] {
     border-radius: 18px !important;
     color: white !important;
 }
-
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -358,14 +305,14 @@ font-size:36px;
 margin-bottom:10px;
 color:white;
 ">
-ЖИ менен прогноздоо
+ЖИ технологияларынын жардамы менен студенттердин жетишүүсүн болжолдуу аныктоо
 </h2>
 
 <p style="
 font-size:18px;
 color:#d8b4fe;
 ">
-Жасалма интеллект аркылуу окуучулардын жетишкендигин анализдөө жана болжолдоо
+Жетишкендиктерди анализдөө жана болжолдоо
 </p>
 
 </div>
